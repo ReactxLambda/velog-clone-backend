@@ -1,0 +1,19 @@
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-1.0.x"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model user {
+  id           String  @id @db.VarChar(100)
+  password     String? @db.VarChar(100)
+  email        String  @db.VarChar(100)
+  introduction Bytes?  @db.Blob
+  image        String? @db.VarChar(100)
+  velog_name   String  @db.VarChar(100)
+  Social       Json?
+}
