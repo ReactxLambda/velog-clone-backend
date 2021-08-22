@@ -20,8 +20,8 @@ interface PrismaModels {
 interface NexusPrismaInputs {
   Query: {
     users: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'password' | 'email' | 'introduction' | 'image' | 'velog_name' | 'Social'
-      ordering: 'id' | 'password' | 'email' | 'introduction' | 'image' | 'velog_name' | 'Social'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'password' | 'email' | 'introduction' | 'image' | 'velog_name' | 'social'
+      ordering: 'id' | 'password' | 'email' | 'introduction' | 'image' | 'velog_name' | 'social'
     }
   },
   user: {
@@ -50,7 +50,7 @@ interface NexusPrismaOutputs {
     introduction: 'Bytes'
     image: 'String'
     velog_name: 'String'
-    Social: 'Json'
+    social: 'Json'
   }
 }
 

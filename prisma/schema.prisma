@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
   binaryTargets = ["native", "rhel-openssl-1.0.x"]
 }
 
@@ -12,8 +12,8 @@ model user {
   id           String  @id @db.VarChar(100)
   password     String? @db.VarChar(100)
   email        String  @db.VarChar(100)
-  introduction Bytes?  @db.Blob
+  introduction String? @db.Text
   image        String? @db.VarChar(100)
   velog_name   String  @db.VarChar(100)
-  Social       Json?
+  social       Json?
 }

@@ -48,12 +48,19 @@ export interface NexusGenScalars {
   Boolean: boolean
   ID: string
   BigInt: any
+  Bytes: any
+  Json: any
 }
 
 export interface NexusGenObjects {
   Query: {};
   user: { // root type
+    email: string; // String!
     id: string; // String!
+    image?: string | null; // String
+    introduction?: NexusGenScalars['Bytes'] | null; // Bytes
+    social?: NexusGenScalars['Json'] | null; // Json
+    velog_name: string; // String!
   }
 }
 
@@ -72,7 +79,12 @@ export interface NexusGenFieldTypes {
     user: NexusGenRootTypes['user'] | null; // user
   }
   user: { // field return type
+    email: string; // String!
     id: string; // String!
+    image: string | null; // String
+    introduction: NexusGenScalars['Bytes'] | null; // Bytes
+    social: NexusGenScalars['Json'] | null; // Json
+    velog_name: string; // String!
   }
 }
 
@@ -81,7 +93,12 @@ export interface NexusGenFieldTypeNames {
     user: 'user'
   }
   user: { // field return type name
+    email: 'String'
     id: 'String'
+    image: 'String'
+    introduction: 'Bytes'
+    social: 'Json'
+    velog_name: 'String'
   }
 }
 

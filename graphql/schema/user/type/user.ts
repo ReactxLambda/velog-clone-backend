@@ -6,8 +6,8 @@ export const user = objectType({
     t.model.id()
     t.model.email()
     t.model.velog_name()
-    // t.model.introduction()
+    t.model.introduction()
     t.model.image()
-    // t.model.Social()
+    t.model.social()
   }
 })

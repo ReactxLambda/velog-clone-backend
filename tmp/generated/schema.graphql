@@ -7,12 +7,21 @@ The `BigInt` scalar type represents non-fractional signed whole numeric values. 
 """
 scalar BigInt
 
+scalar Bytes
+
+scalar Json
+
 type Query {
   user(where: userWhereUniqueInput!): user
 }
 
 type user {
+  email: String!
   id: String!
+  image: String
+  introduction: Bytes
+  social: Json
+  velog_name: String!
 }
 
 input userWhereUniqueInput {
