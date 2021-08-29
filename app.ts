@@ -8,13 +8,13 @@ import { nexusSchemaPrisma } from 'nexus-plugin-prisma/schema'
 
 import * as path from 'path'
 
-import { user, post, read } from './graphql/schema/schema'
+import { Schemas } from './graphql/schema/schema'
 import { GraphQLBigInt } from './graphql/type'
 
 import Query from './graphql/query'
 
 const schema = makeSchema({
-  types: [Query, user, post, read, asNexusMethod(GraphQLBigInt, 'BigInt')],
+  types: [Query, Schemas, asNexusMethod(GraphQLBigInt, 'BigInt')],
   plugins: [
     nexusSchemaPrisma({
       experimentalCRUD: true,

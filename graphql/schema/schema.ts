@@ -1,3 +1,9 @@
-export * from './user'
-export * from './post'
-export * from './read'
+import {user} from './user'
+import {post} from './post'
+import {read} from './read'
+
+export const Schemas = {
+    user,
+    post,
+    read,
+}
