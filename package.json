@@ -3,9 +3,9 @@
   "scripts": {
     "format": "prettier --write \"graphql/**/*.ts\" \"app.ts\"",
     "introspect": "yarn prisma introspect && yarn prisma generate",
-    "offline": "NODE_ENV=development sls offline start --stage development",
-    "deploy:stagging": "NODE_ENV=stagging sls deploy --stage stagging",
-    "deploy:production": "NODE_ENV=production sls deploy --stage production"
+    "offline": "NODE_ENV=dev sls offline start --stage dev",
+    "deploy:staging": "NODE_ENV=stage sls deploy --stage stage",
+    "deploy:production": "NODE_ENV=prod sls deploy --stage prod"
   },
   "prettier": {
     "semi": false,
