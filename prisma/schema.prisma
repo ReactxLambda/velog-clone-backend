@@ -26,11 +26,11 @@ model comment {
 }
 
 model interest {
-  user_id    String    @db.VarChar(100)
-  post_id    String    @db.VarChar(100)
-  created_at DateTime? @db.DateTime(0)
-  post       post      @relation(fields: [post_id], references: [id])
-  user       user      @relation(fields: [user_id], references: [id])
+  user_id    String   @db.VarChar(100)
+  post_id    String   @db.VarChar(100)
+  created_at DateTime @default(now()) @db.DateTime(0)
+  post       post     @relation(fields: [post_id], references: [id])
+  user       user     @relation(fields: [user_id], references: [id])
 
   @@id([user_id, post_id])
   @@index([post_id], name: "interest_FK")
@@ -57,10 +57,11 @@ model post {
 }
 
 model post_tag_ref {
-  tag_name String @db.VarChar(100)
-  post_id  String @db.VarChar(100)
-  post     post   @relation(fields: [post_id], references: [id])
-  tag      tag    @relation(fields: [tag_name], references: [name])
+  tag_name   String   @db.VarChar(100)
+  post_id    String   @db.VarChar(100)
+  created_at DateTime @default(now()) @db.DateTime(0)
+  post       post     @relation(fields: [post_id], references: [id])
+  tag        tag      @relation(fields: [tag_name], references: [name])
 
   @@id([tag_name, post_id])
   @@index([post_id], name: "post_tag_ref_FK")
@@ -74,11 +75,11 @@ model post_temp {
 }
 
 model read {
-  user_id    String    @db.VarChar(100)
-  post_id    String    @db.VarChar(100)
-  created_at DateTime? @db.DateTime(0)
-  post       post      @relation(fields: [post_id], references: [id])
-  user       user      @relation(fields: [user_id], references: [id])
+  user_id    String   @db.VarChar(100)
+  post_id    String   @db.VarChar(100)
+  created_at DateTime @default(now()) @db.DateTime(0)
+  post       post     @relation(fields: [post_id], references: [id])
+  user       user     @relation(fields: [user_id], references: [id])
 
   @@id([user_id, post_id])
   @@index([post_id], name: "read_FK_1")
@@ -86,7 +87,7 @@ model read {
 
 model tag {
   name         String         @id @db.VarChar(100)
-  created_at   DateTime?      @db.DateTime(0)
+  created_at   DateTime       @default(now()) @db.DateTime(0)
   post_tag_ref post_tag_ref[]
 }
 
@@ -110,7 +111,7 @@ model post_group {
   name       String   @db.VarChar(200)
   user_id    String   @db.VarChar(100)
   priority   Json?
-  created_at DateTime @db.DateTime(0)
+  created_at DateTime @default(now()) @db.DateTime(0)
   user       user     @relation(fields: [user_id], references: [id])
 
   @@index([user_id], name: "series_FK")
