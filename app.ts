@@ -1,18 +1,17 @@
-const { ApolloServer } = require('apollo-server-lambda');
-import { PrismaClient } from "@prisma/client";
+const { ApolloServer } = require('apollo-server-lambda')
+import { PrismaClient } from '@prisma/client'
 
-import { Context } from "./graphql"
+import { Context } from './graphql'
 
-import { asNexusMethod, makeSchema } from "nexus";
-import { nexusSchemaPrisma } from 'nexus-plugin-prisma/schema';
+import { asNexusMethod, makeSchema } from 'nexus'
+import { nexusSchemaPrisma } from 'nexus-plugin-prisma/schema'
 
-import * as path from 'path';
+import * as path from 'path'
 
-import { user,
-post, read } from "./graphql/schema/schema";
-import { GraphQLBigInt } from "./graphql/type";
+import { user, post, read } from './graphql/schema/schema'
+import { GraphQLBigInt } from './graphql/type'
 
-import Query from './graphql/query';
+import Query from './graphql/query'
 
 const schema = makeSchema({
   types: [Query, user, asNexusMethod(GraphQLBigInt, 'BigInt')],
@@ -22,31 +21,41 @@ const schema = makeSchema({
       paginationStrategy: 'prisma',
       prismaClient: (ctx: Context) => ctx.db,
       outputs: {
-        typegen: path.join(`${process.env.NODE_ENV === "development" ? __dirname : ""}` + '/tmp/generated/typegen-nexus-plugin-prisma.d.ts'),
+        typegen: path.join(
+          `${process.env.NODE_ENV === 'development' ? __dirname : ''}` +
+            '/tmp/generated/typegen-nexus-plugin-prisma.d.ts',
+        ),
       },
-    })
+    }),
   ],
   outputs: {
-    schema: path.join(`${process.env.NODE_ENV === "development" ? __dirname : ""}` + '/tmp/generated/schema.graphql'),
-    typegen: path.join(`${process.env.NODE_ENV === "development" ? __dirname : ""}` + '/tmp/generated/nexus.ts')
-  }
-});
+    schema: path.join(
+      `${process.env.NODE_ENV === 'development' ? __dirname : ''}` +
+        '/tmp/generated/schema.graphql',
+    ),
+    typegen: path.join(
+      `${process.env.NODE_ENV === 'development' ? __dirname : ''}` +
+        '/tmp/generated/nexus.ts',
+    ),
+  },
+})
 
 const server = new ApolloServer({
   schema: schema,
   context: async ({ req }): Promise<Context> => ({
-    db: new PrismaClient()
+    db: new PrismaClient(),
   }),
-  playground: process.env.NODE_ENV === "production"
-    ? false
-    : {
-      endpoint: `/${process.env.NODE_ENV}/graphql`,
-    }
-});
+  playground:
+    process.env.NODE_ENV === 'production'
+      ? false
+      : {
+          endpoint: `/${process.env.NODE_ENV}/graphql`,
+        },
+})
 
 exports.graphqlHandler = server.createHandler({
   cors: {
     origin: '*',
     credentials: true,
   },
-});
+})
