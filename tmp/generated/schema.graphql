@@ -16,11 +16,47 @@ type Query {
   user(where: userWhereUniqueInput!): user
 }
 
+type comment {
+  comment: comment!
+  created_at: DateTime!
+  id: String!
+  other_comment(cursor: commentWhereUniqueInput, skip: Int, take: Int): [comment!]!
+  post: post!
+  reply_to: String!
+  text: String!
+  user: user!
+}
+
+input commentWhereUniqueInput {
+  id: String
+}
+
+type interest {
+  created_at: DateTime
+  post: post!
+  user: user!
+}
+
+input interestUser_idPost_idCompoundUniqueInput {
+  post_id: String!
+  user_id: String!
+}
+
+input interestWhereUniqueInput {
+  user_id_post_id: interestUser_idPost_idCompoundUniqueInput
+}
+
 type post {
+  comment(cursor: commentWhereUniqueInput, skip: Int, take: Int): [comment!]!
   content: String!
+  created_at: DateTime!
   hidden: Boolean!
   id: String!
+  interest(cursor: interestWhereUniqueInput, skip: Int, take: Int): [interest!]!
+  post_tag_ref(cursor: post_tag_refWhereUniqueInput, skip: Int, take: Int): [post_tag_ref!]!
+  post_temp: post_temp
   pre_content: String!
+  read(cursor: readWhereUniqueInput, skip: Int, take: Int): [read!]!
   thumbnail: String
   title: String!
   url: String!
@@ -32,10 +68,54 @@ input postWhereUniqueInput {
   id: String
 }
 
+type post_group {
+  created_at: DateTime!
+  id: String!
+  name: String!
+  priority: Json
+  user: user!
+}
+
+type post_tag_ref {
+  post: post!
+  tag: tag!
+}
+
+input post_tag_refTag_namePost_idCompoundUniqueInput {
+  post_id: String!
+  tag_name: String!
+}
+
+input post_tag_refWhereUniqueInput {
+  tag_name_post_id: post_tag_refTag_namePost_idCompoundUniqueInput
+}
+
+type post_temp {
+  content: String
+  post: post!
+  post_id: String!
+  title: String
+}
+
 type read {
   created_at: DateTime
   post: post!
   user: user!
+}
+
+input readUser_idPost_idCompoundUniqueInput {
+  post_id: String!
+  user_id: String!
+}
+
+input readWhereUniqueInput {
+  user_id_post_id: readUser_idPost_idCompoundUniqueInput
+}
+
+type tag {
+  created_at: DateTime
+  name: String!
+  post_tag_ref(cursor: post_tag_refWhereUniqueInput, skip: Int, take: Int): [post_tag_ref!]!
 }
 
 type user {
