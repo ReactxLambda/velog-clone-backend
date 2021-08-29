@@ -11,9 +11,29 @@ scalar DateTime
 
 scalar Json
 
+type Mutation {
+  createOnepost(data: postCreateInput!): post!
+}
+
 type Query {
+  comment(where: commentWhereUniqueInput!): comment
+  comments(cursor: commentWhereUniqueInput, skip: Int, take: Int): [comment!]!
+  interest(where: interestWhereUniqueInput!): interest
+  interests(cursor: interestWhereUniqueInput, skip: Int, take: Int): [interest!]!
   post(where: postWhereUniqueInput!): post
+  postGroup(where: post_groupWhereUniqueInput!): post_group
+  postGroups(cursor: post_groupWhereUniqueInput, skip: Int, take: Int): [post_group!]!
+  postTagRef(where: post_tag_refWhereUniqueInput!): post_tag_ref
+  postTagRefs(cursor: post_tag_refWhereUniqueInput, skip: Int, take: Int): [post_tag_ref!]!
+  postTemp(where: post_tempWhereUniqueInput!): post_temp
+  postTemps(cursor: post_tempWhereUniqueInput, skip: Int, take: Int): [post_temp!]!
+  posts(cursor: postWhereUniqueInput, skip: Int, take: Int): [post!]!
+  read(where: readWhereUniqueInput!): read
+  reads(cursor: readWhereUniqueInput, skip: Int, take: Int): [read!]!
+  tag(where: tagWhereUniqueInput!): tag
+  tags(cursor: tagWhereUniqueInput, skip: Int, take: Int): [tag!]!
   user(where: userWhereUniqueInput!): user
+  users(cursor: userWhereUniqueInput, skip: Int, take: Int): [user!]!
 }
 
 type comment {
@@ -27,6 +47,128 @@ type comment {
   user: user!
 }
 
+input commentCreateManyCommentInput {
+  created_at: DateTime
+  id: String!
+  post_id: String!
+  text: String!
+  user_id: String!
+}
+
+input commentCreateManyCommentInputEnvelope {
+  data: [commentCreateManyCommentInput!]
+  skipDuplicates: Boolean
+}
+
+input commentCreateManyPostInput {
+  created_at: DateTime
+  id: String!
+  reply_to: String!
+  text: String!
+  user_id: String!
+}
+
+input commentCreateManyPostInputEnvelope {
+  data: [commentCreateManyPostInput!]
+  skipDuplicates: Boolean
+}
+
+input commentCreateManyUserInput {
+  created_at: DateTime
+  id: String!
+  post_id: String!
+  reply_to: String!
+  text: String!
+}
+
+input commentCreateManyUserInputEnvelope {
+  data: [commentCreateManyUserInput!]
+  skipDuplicates: Boolean
+}
+
+input commentCreateNestedManyWithoutCommentInput {
+  connect: [commentWhereUniqueInput!]
+  connectOrCreate: [commentCreateOrConnectWithoutCommentInput!]
+  create: [commentCreateWithoutCommentInput!]
+  createMany: commentCreateManyCommentInputEnvelope
+}
+
+input commentCreateNestedManyWithoutPostInput {
+  connect: [commentWhereUniqueInput!]
+  connectOrCreate: [commentCreateOrConnectWithoutPostInput!]
+  create: [commentCreateWithoutPostInput!]
+  createMany: commentCreateManyPostInputEnvelope
+}
+
+input commentCreateNestedManyWithoutUserInput {
+  connect: [commentWhereUniqueInput!]
+  connectOrCreate: [commentCreateOrConnectWithoutUserInput!]
+  create: [commentCreateWithoutUserInput!]
+  createMany: commentCreateManyUserInputEnvelope
+}
+
+input commentCreateNestedOneWithoutOther_commentInput {
+  connect: commentWhereUniqueInput
+  connectOrCreate: commentCreateOrConnectWithoutOther_commentInput
+  create: commentCreateWithoutOther_commentInput
+}
+
+input commentCreateOrConnectWithoutCommentInput {
+  create: commentCreateWithoutCommentInput!
+  where: commentWhereUniqueInput!
+}
+
+input commentCreateOrConnectWithoutOther_commentInput {
+  create: commentCreateWithoutOther_commentInput!
+  where: commentWhereUniqueInput!
+}
+
+input commentCreateOrConnectWithoutPostInput {
+  create: commentCreateWithoutPostInput!
+  where: commentWhereUniqueInput!
+}
+
+input commentCreateOrConnectWithoutUserInput {
+  create: commentCreateWithoutUserInput!
+  where: commentWhereUniqueInput!
+}
+
+input commentCreateWithoutCommentInput {
+  created_at: DateTime
+  id: String!
+  other_comment: commentCreateNestedManyWithoutCommentInput
+  post: postCreateNestedOneWithoutCommentInput!
+  text: String!
+  user: userCreateNestedOneWithoutCommentInput!
+}
+
+input commentCreateWithoutOther_commentInput {
+  comment: commentCreateNestedOneWithoutOther_commentInput!
+  created_at: DateTime
+  id: String!
+  post: postCreateNestedOneWithoutCommentInput!
+  text: String!
+  user: userCreateNestedOneWithoutCommentInput!
+}
+
+input commentCreateWithoutPostInput {
+  comment: commentCreateNestedOneWithoutOther_commentInput!
+  created_at: DateTime
+  id: String!
+  other_comment: commentCreateNestedManyWithoutCommentInput
+  text: String!
+  user: userCreateNestedOneWithoutCommentInput!
+}
+
+input commentCreateWithoutUserInput {
+  comment: commentCreateNestedOneWithoutOther_commentInput!
+  created_at: DateTime
+  id: String!
+  other_comment: commentCreateNestedManyWithoutCommentInput
+  post: postCreateNestedOneWithoutCommentInput!
+  text: String!
+}
+
 input commentWhereUniqueInput {
   id: String
 }
@@ -35,6 +177,60 @@ type interest {
   created_at: DateTime
   post: post!
   user: user!
+}
+
+input interestCreateManyPostInput {
+  created_at: DateTime
+  user_id: String!
+}
+
+input interestCreateManyPostInputEnvelope {
+  data: [interestCreateManyPostInput!]
+  skipDuplicates: Boolean
+}
+
+input interestCreateManyUserInput {
+  created_at: DateTime
+  post_id: String!
+}
+
+input interestCreateManyUserInputEnvelope {
+  data: [interestCreateManyUserInput!]
+  skipDuplicates: Boolean
+}
+
+input interestCreateNestedManyWithoutPostInput {
+  connect: [interestWhereUniqueInput!]
+  connectOrCreate: [interestCreateOrConnectWithoutPostInput!]
+  create: [interestCreateWithoutPostInput!]
+  createMany: interestCreateManyPostInputEnvelope
+}
+
+input interestCreateNestedManyWithoutUserInput {
+  connect: [interestWhereUniqueInput!]
+  connectOrCreate: [interestCreateOrConnectWithoutUserInput!]
+  create: [interestCreateWithoutUserInput!]
+  createMany: interestCreateManyUserInputEnvelope
+}
+
+input interestCreateOrConnectWithoutPostInput {
+  create: interestCreateWithoutPostInput!
+  where: interestWhereUniqueInput!
+}
+
+input interestCreateOrConnectWithoutUserInput {
+  create: interestCreateWithoutUserInput!
+  where: interestWhereUniqueInput!
+}
+
+input interestCreateWithoutPostInput {
+  created_at: DateTime
+  user: userCreateNestedOneWithoutInterestInput!
+}
+
+input interestCreateWithoutUserInput {
+  created_at: DateTime
+  post: postCreateNestedOneWithoutInterestInput!
 }
 
 input interestUser_idPost_idCompoundUniqueInput {
@@ -64,6 +260,148 @@ type post {
   user_id: String!
 }
 
+input postCreateInput {
+  comment: commentCreateNestedManyWithoutPostInput
+  content: String!
+  created_at: DateTime!
+  hidden: Boolean
+  id: String!
+  interest: interestCreateNestedManyWithoutPostInput
+  post_tag_ref: post_tag_refCreateNestedManyWithoutPostInput
+  post_temp: post_tempCreateNestedOneWithoutPostInput
+  pre_content: String!
+  read: readCreateNestedManyWithoutPostInput
+  thumbnail: String
+  title: String!
+  url: String!
+  user: userCreateNestedOneWithoutPostInput!
+}
+
+input postCreateManyUserInput {
+  content: String!
+  created_at: DateTime!
+  hidden: Boolean
+  id: String!
+  pre_content: String!
+  thumbnail: String
+  title: String!
+  url: String!
+}
+
+input postCreateManyUserInputEnvelope {
+  data: [postCreateManyUserInput!]
+  skipDuplicates: Boolean
+}
+
+input postCreateNestedManyWithoutUserInput {
+  connect: [postWhereUniqueInput!]
+  connectOrCreate: [postCreateOrConnectWithoutUserInput!]
+  create: [postCreateWithoutUserInput!]
+  createMany: postCreateManyUserInputEnvelope
+}
+
+input postCreateNestedOneWithoutCommentInput {
+  connect: postWhereUniqueInput
+  connectOrCreate: postCreateOrConnectWithoutCommentInput
+  create: postCreateWithoutCommentInput
+}
+
+input postCreateNestedOneWithoutInterestInput {
+  connect: postWhereUniqueInput
+  connectOrCreate: postCreateOrConnectWithoutInterestInput
+  create: postCreateWithoutInterestInput
+}
+
+input postCreateNestedOneWithoutReadInput {
+  connect: postWhereUniqueInput
+  connectOrCreate: postCreateOrConnectWithoutReadInput
+  create: postCreateWithoutReadInput
+}
+
+input postCreateOrConnectWithoutCommentInput {
+  create: postCreateWithoutCommentInput!
+  where: postWhereUniqueInput!
+}
+
+input postCreateOrConnectWithoutInterestInput {
+  create: postCreateWithoutInterestInput!
+  where: postWhereUniqueInput!
+}
+
+input postCreateOrConnectWithoutReadInput {
+  create: postCreateWithoutReadInput!
+  where: postWhereUniqueInput!
+}
+
+input postCreateOrConnectWithoutUserInput {
+  create: postCreateWithoutUserInput!
+  where: postWhereUniqueInput!
+}
+
+input postCreateWithoutCommentInput {
+  content: String!
+  created_at: DateTime!
+  hidden: Boolean
+  id: String!
+  interest: interestCreateNestedManyWithoutPostInput
+  post_tag_ref: post_tag_refCreateNestedManyWithoutPostInput
+  post_temp: post_tempCreateNestedOneWithoutPostInput
+  pre_content: String!
+  read: readCreateNestedManyWithoutPostInput
+  thumbnail: String
+  title: String!
+  url: String!
+  user: userCreateNestedOneWithoutPostInput!
+}
+
+input postCreateWithoutInterestInput {
+  comment: commentCreateNestedManyWithoutPostInput
+  content: String!
+  created_at: DateTime!
+  hidden: Boolean
+  id: String!
+  post_tag_ref: post_tag_refCreateNestedManyWithoutPostInput
+  post_temp: post_tempCreateNestedOneWithoutPostInput
+  pre_content: String!
+  read: readCreateNestedManyWithoutPostInput
+  thumbnail: String
+  title: String!
+  url: String!
+  user: userCreateNestedOneWithoutPostInput!
+}
+
+input postCreateWithoutReadInput {
+  comment: commentCreateNestedManyWithoutPostInput
+  content: String!
+  created_at: DateTime!
+  hidden: Boolean
+  id: String!
+  interest: interestCreateNestedManyWithoutPostInput
+  post_tag_ref: post_tag_refCreateNestedManyWithoutPostInput
+  post_temp: post_tempCreateNestedOneWithoutPostInput
+  pre_content: String!
+  thumbnail: String
+  title: String!
+  url: String!
+  user: userCreateNestedOneWithoutPostInput!
+}
+
+input postCreateWithoutUserInput {
+  comment: commentCreateNestedManyWithoutPostInput
+  content: String!
+  created_at: DateTime!
+  hidden: Boolean
+  id: String!
+  interest: interestCreateNestedManyWithoutPostInput
+  post_tag_ref: post_tag_refCreateNestedManyWithoutPostInput
+  post_temp: post_tempCreateNestedOneWithoutPostInput
+  pre_content: String!
+  read: readCreateNestedManyWithoutPostInput
+  thumbnail: String
+  title: String!
+  url: String!
+}
+
 input postWhereUniqueInput {
   id: String
 }
@@ -76,9 +414,69 @@ type post_group {
   user: user!
 }
 
+input post_groupCreateManyUserInput {
+  created_at: DateTime!
+  id: String!
+  name: String!
+  priority: Json
+}
+
+input post_groupCreateManyUserInputEnvelope {
+  data: [post_groupCreateManyUserInput!]
+  skipDuplicates: Boolean
+}
+
+input post_groupCreateNestedManyWithoutUserInput {
+  connect: [post_groupWhereUniqueInput!]
+  connectOrCreate: [post_groupCreateOrConnectWithoutUserInput!]
+  create: [post_groupCreateWithoutUserInput!]
+  createMany: post_groupCreateManyUserInputEnvelope
+}
+
+input post_groupCreateOrConnectWithoutUserInput {
+  create: post_groupCreateWithoutUserInput!
+  where: post_groupWhereUniqueInput!
+}
+
+input post_groupCreateWithoutUserInput {
+  created_at: DateTime!
+  id: String!
+  name: String!
+  priority: Json
+}
+
+input post_groupWhereUniqueInput {
+  id: String
+}
+
 type post_tag_ref {
   post: post!
   tag: tag!
+}
+
+input post_tag_refCreateManyPostInput {
+  tag_name: String!
+}
+
+input post_tag_refCreateManyPostInputEnvelope {
+  data: [post_tag_refCreateManyPostInput!]
+  skipDuplicates: Boolean
+}
+
+input post_tag_refCreateNestedManyWithoutPostInput {
+  connect: [post_tag_refWhereUniqueInput!]
+  connectOrCreate: [post_tag_refCreateOrConnectWithoutPostInput!]
+  create: [post_tag_refCreateWithoutPostInput!]
+  createMany: post_tag_refCreateManyPostInputEnvelope
+}
+
+input post_tag_refCreateOrConnectWithoutPostInput {
+  create: post_tag_refCreateWithoutPostInput!
+  where: post_tag_refWhereUniqueInput!
+}
+
+input post_tag_refCreateWithoutPostInput {
+  tag: tagCreateNestedOneWithoutPost_tag_refInput!
 }
 
 input post_tag_refTag_namePost_idCompoundUniqueInput {
@@ -97,10 +495,84 @@ type post_temp {
   title: String
 }
 
+input post_tempCreateNestedOneWithoutPostInput {
+  connect: post_tempWhereUniqueInput
+  connectOrCreate: post_tempCreateOrConnectWithoutPostInput
+  create: post_tempCreateWithoutPostInput
+}
+
+input post_tempCreateOrConnectWithoutPostInput {
+  create: post_tempCreateWithoutPostInput!
+  where: post_tempWhereUniqueInput!
+}
+
+input post_tempCreateWithoutPostInput {
+  content: String
+  title: String
+}
+
+input post_tempWhereUniqueInput {
+  post_id: String
+}
+
 type read {
   created_at: DateTime
   post: post!
   user: user!
+}
+
+input readCreateManyPostInput {
+  created_at: DateTime
+  user_id: String!
+}
+
+input readCreateManyPostInputEnvelope {
+  data: [readCreateManyPostInput!]
+  skipDuplicates: Boolean
+}
+
+input readCreateManyUserInput {
+  created_at: DateTime
+  post_id: String!
+}
+
+input readCreateManyUserInputEnvelope {
+  data: [readCreateManyUserInput!]
+  skipDuplicates: Boolean
+}
+
+input readCreateNestedManyWithoutPostInput {
+  connect: [readWhereUniqueInput!]
+  connectOrCreate: [readCreateOrConnectWithoutPostInput!]
+  create: [readCreateWithoutPostInput!]
+  createMany: readCreateManyPostInputEnvelope
+}
+
+input readCreateNestedManyWithoutUserInput {
+  connect: [readWhereUniqueInput!]
+  connectOrCreate: [readCreateOrConnectWithoutUserInput!]
+  create: [readCreateWithoutUserInput!]
+  createMany: readCreateManyUserInputEnvelope
+}
+
+input readCreateOrConnectWithoutPostInput {
+  create: readCreateWithoutPostInput!
+  where: readWhereUniqueInput!
+}
+
+input readCreateOrConnectWithoutUserInput {
+  create: readCreateWithoutUserInput!
+  where: readWhereUniqueInput!
+}
+
+input readCreateWithoutPostInput {
+  created_at: DateTime
+  user: userCreateNestedOneWithoutReadInput!
+}
+
+input readCreateWithoutUserInput {
+  created_at: DateTime
+  post: postCreateNestedOneWithoutReadInput!
 }
 
 input readUser_idPost_idCompoundUniqueInput {
@@ -118,11 +590,131 @@ type tag {
   post_tag_ref(cursor: post_tag_refWhereUniqueInput, skip: Int, take: Int): [post_tag_ref!]!
 }
 
+input tagCreateNestedOneWithoutPost_tag_refInput {
+  connect: tagWhereUniqueInput
+  connectOrCreate: tagCreateOrConnectWithoutPost_tag_refInput
+  create: tagCreateWithoutPost_tag_refInput
+}
+
+input tagCreateOrConnectWithoutPost_tag_refInput {
+  create: tagCreateWithoutPost_tag_refInput!
+  where: tagWhereUniqueInput!
+}
+
+input tagCreateWithoutPost_tag_refInput {
+  created_at: DateTime
+  name: String!
+}
+
+input tagWhereUniqueInput {
+  name: String
+}
+
 type user {
   email: String!
   id: String!
   image: String
   introduction: String
+  social: Json
+  velog_name: String!
+}
+
+input userCreateNestedOneWithoutCommentInput {
+  connect: userWhereUniqueInput
+  connectOrCreate: userCreateOrConnectWithoutCommentInput
+  create: userCreateWithoutCommentInput
+}
+
+input userCreateNestedOneWithoutInterestInput {
+  connect: userWhereUniqueInput
+  connectOrCreate: userCreateOrConnectWithoutInterestInput
+  create: userCreateWithoutInterestInput
+}
+
+input userCreateNestedOneWithoutPostInput {
+  connect: userWhereUniqueInput
+  connectOrCreate: userCreateOrConnectWithoutPostInput
+  create: userCreateWithoutPostInput
+}
+
+input userCreateNestedOneWithoutReadInput {
+  connect: userWhereUniqueInput
+  connectOrCreate: userCreateOrConnectWithoutReadInput
+  create: userCreateWithoutReadInput
+}
+
+input userCreateOrConnectWithoutCommentInput {
+  create: userCreateWithoutCommentInput!
+  where: userWhereUniqueInput!
+}
+
+input userCreateOrConnectWithoutInterestInput {
+  create: userCreateWithoutInterestInput!
+  where: userWhereUniqueInput!
+}
+
+input userCreateOrConnectWithoutPostInput {
+  create: userCreateWithoutPostInput!
+  where: userWhereUniqueInput!
+}
+
+input userCreateOrConnectWithoutReadInput {
+  create: userCreateWithoutReadInput!
+  where: userWhereUniqueInput!
+}
+
+input userCreateWithoutCommentInput {
+  email: String!
+  id: String!
+  image: String
+  interest: interestCreateNestedManyWithoutUserInput
+  introduction: String
+  password: String
+  post: postCreateNestedManyWithoutUserInput
+  post_group: post_groupCreateNestedManyWithoutUserInput
+  read: readCreateNestedManyWithoutUserInput
+  social: Json
+  velog_name: String!
+}
+
+input userCreateWithoutInterestInput {
+  comment: commentCreateNestedManyWithoutUserInput
+  email: String!
+  id: String!
+  image: String
+  introduction: String
+  password: String
+  post: postCreateNestedManyWithoutUserInput
+  post_group: post_groupCreateNestedManyWithoutUserInput
+  read: readCreateNestedManyWithoutUserInput
+  social: Json
+  velog_name: String!
+}
+
+input userCreateWithoutPostInput {
+  comment: commentCreateNestedManyWithoutUserInput
+  email: String!
+  id: String!
+  image: String
+  interest: interestCreateNestedManyWithoutUserInput
+  introduction: String
+  password: String
+  post_group: post_groupCreateNestedManyWithoutUserInput
+  read: readCreateNestedManyWithoutUserInput
+  social: Json
+  velog_name: String!
+}
+
+input userCreateWithoutReadInput {
+  comment: commentCreateNestedManyWithoutUserInput
+  email: String!
+  id: String!
+  image: String
+  interest: interestCreateNestedManyWithoutUserInput
+  introduction: String
+  password: String
+  post: postCreateNestedManyWithoutUserInput
+  post_group: post_groupCreateNestedManyWithoutUserInput
   social: Json
   velog_name: String!
 }

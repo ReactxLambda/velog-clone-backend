@@ -12,9 +12,10 @@ import { Schemas } from './graphql/schema/schema'
 import { GraphQLBigInt } from './graphql/type'
 
 import Query from './graphql/query'
+import Mutaion from './graphql/mutaion'
 
 const schema = makeSchema({
-  types: [Query, Schemas, asNexusMethod(GraphQLBigInt, 'BigInt')],
+  types: [Query, Mutaion, Schemas, asNexusMethod(GraphQLBigInt, 'BigInt')],
   plugins: [
     nexusSchemaPrisma({
       experimentalCRUD: true,
