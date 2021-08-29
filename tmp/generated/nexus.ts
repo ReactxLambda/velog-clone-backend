@@ -33,6 +33,9 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  postWhereUniqueInput: { // input type
+    id?: string | null; // String
+  }
   userWhereUniqueInput: { // input type
     id?: string | null; // String
   }
@@ -48,11 +51,25 @@ export interface NexusGenScalars {
   Boolean: boolean
   ID: string
   BigInt: any
+  DateTime: any
   Json: any
 }
 
 export interface NexusGenObjects {
   Query: {};
+  post: { // root type
+    content: string; // String!
+    hidden: boolean; // Boolean!
+    id: string; // String!
+    pre_content: string; // String!
+    thumbnail?: string | null; // String
+    title: string; // String!
+    url: string; // String!
+    user_id: string; // String!
+  }
+  read: { // root type
+    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
   user: { // root type
     email: string; // String!
     id: string; // String!
@@ -75,7 +92,24 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
   Query: { // field return type
+    post: NexusGenRootTypes['post'] | null; // post
     user: NexusGenRootTypes['user'] | null; // user
+  }
+  post: { // field return type
+    content: string; // String!
+    hidden: boolean; // Boolean!
+    id: string; // String!
+    pre_content: string; // String!
+    thumbnail: string | null; // String
+    title: string; // String!
+    url: string; // String!
+    user: NexusGenRootTypes['user']; // user!
+    user_id: string; // String!
+  }
+  read: { // field return type
+    created_at: NexusGenScalars['DateTime'] | null; // DateTime
+    post: NexusGenRootTypes['post']; // post!
+    user: NexusGenRootTypes['user']; // user!
   }
   user: { // field return type
     email: string; // String!
@@ -89,6 +123,23 @@ export interface NexusGenFieldTypes {
 
 export interface NexusGenFieldTypeNames {
   Query: { // field return type name
+    post: 'post'
+    user: 'user'
+  }
+  post: { // field return type name
+    content: 'String'
+    hidden: 'Boolean'
+    id: 'String'
+    pre_content: 'String'
+    thumbnail: 'String'
+    title: 'String'
+    url: 'String'
+    user: 'user'
+    user_id: 'String'
+  }
+  read: { // field return type name
+    created_at: 'DateTime'
+    post: 'post'
     user: 'user'
   }
   user: { // field return type name
@@ -103,6 +154,9 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Query: {
+    post: { // args
+      where: NexusGenInputs['postWhereUniqueInput']; // postWhereUniqueInput!
+    }
     user: { // args
       where: NexusGenInputs['userWhereUniqueInput']; // userWhereUniqueInput!
     }

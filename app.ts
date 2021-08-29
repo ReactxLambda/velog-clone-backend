@@ -14,7 +14,7 @@ import { GraphQLBigInt } from './graphql/type'
 import Query from './graphql/query'
 
 const schema = makeSchema({
-  types: [Query, user, asNexusMethod(GraphQLBigInt, 'BigInt')],
+  types: [Query, user, post, read, asNexusMethod(GraphQLBigInt, 'BigInt')],
   plugins: [
     nexusSchemaPrisma({
       experimentalCRUD: true,

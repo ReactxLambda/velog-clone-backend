@@ -14,9 +14,9 @@ export const post = objectType({
     t.model.created_at()
     t.model.hidden()
     t.model.read()
-    t.model.comment()
-    t.model.interest()
-    t.model.post_tag_ref()
-    t.model.post_temp()
+    // t.model.comment()
+    // t.model.interest()
+    // t.model.post_tag_ref()
+    // t.model.post_temp()
   },
 })
