@@ -1,13 +1,11 @@
 {
   "license": "GPL-3.0",
   "scripts": {
-    "dev": "ts-node app",
-    "build": "nexus build",
-    "start": "ts-node app",
+    "format": "prettier --write \"graphql/**/*.ts\" \"app.ts\"",
     "introspect": "yarn prisma introspect && yarn prisma generate",
-    "offline": "NODE_ENV=development sls offline start --stage development",
-    "deploy:stagging": "NODE_ENV=stagging sls deploy --stage stagging",
-    "deploy:production": "NODE_ENV=production sls deploy --stage production"
+    "offline": "NODE_ENV=dev sls offline start --stage dev",
+    "deploy:staging": "NODE_ENV=stage sls deploy --stage stage",
+    "deploy:production": "NODE_ENV=prod sls deploy --stage prod"
   },
   "prettier": {
     "semi": false,
@@ -24,6 +22,7 @@
     "prisma": "2.23.0"
   },
   "devDependencies": {
+    "prettier": "^2.3.2",
     "serverless-dotenv-plugin": "^3.9.0",
     "serverless-offline": "^7.0.0",
     "serverless-plugin-typescript": "^1.1.9",

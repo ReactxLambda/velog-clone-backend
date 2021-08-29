@@ -8,12 +8,111 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model comment {
+  id            String    @id @db.VarChar(100)
+  user_id       String    @db.VarChar(100)
+  post_id       String    @db.VarChar(100)
+  reply_to      String    @db.VarChar(100)
+  text          String    @db.VarChar(600)
+  created_at    DateTime? @default(now()) @db.DateTime(0)
+  post          post      @relation(fields: [post_id], references: [id])
+  comment       comment   @relation("commentTocomment_reply_to", fields: [reply_to], references: [id])
+  user          user      @relation(fields: [user_id], references: [id])
+  other_comment comment[] @relation("commentTocomment_reply_to")
+
+  @@index([post_id], name: "comment_FK")
+  @@index([user_id], name: "comment_FK_1")
+  @@index([reply_to], name: "comment_FK_2")
+}
+
+model interest {
+  user_id    String   @db.VarChar(100)
+  post_id    String   @db.VarChar(100)
+  created_at DateTime @default(now()) @db.DateTime(0)
+  post       post     @relation(fields: [post_id], references: [id])
+  user       user     @relation(fields: [user_id], references: [id])
+
+  @@id([user_id, post_id])
+  @@index([post_id], name: "interest_FK")
+}
+
+model post {
+  id           String         @id @db.VarChar(100)
+  title        String         @db.VarChar(200)
+  content      String         @db.Text
+  created_at   DateTime       @default(now()) @db.DateTime(0)
+  pre_content  String         @db.VarChar(300)
+  thumbnail    String?        @db.VarChar(200)
+  url          String         @db.VarChar(100)
+  hidden       Boolean        @default(false)
+  user_id      String         @db.VarChar(100)
+  user         user           @relation(fields: [user_id], references: [id])
+  comment      comment[]
+  interest     interest[]
+  post_tag_ref post_tag_ref[]
+  post_temp    post_temp?
+  read         read[]
+
+  @@index([user_id], name: "post_FK")
+}
+
+model post_tag_ref {
+  tag_name   String   @db.VarChar(100)
+  post_id    String   @db.VarChar(100)
+  created_at DateTime @default(now()) @db.DateTime(0)
+  post       post     @relation(fields: [post_id], references: [id])
+  tag        tag      @relation(fields: [tag_name], references: [name])
+
+  @@id([tag_name, post_id])
+  @@index([post_id], name: "post_tag_ref_FK")
+}
+
+model post_temp {
+  post_id String  @id @db.VarChar(100)
+  content String? @db.Text
+  title   String? @db.VarChar(200)
+  post    post    @relation(fields: [post_id], references: [id])
+}
+
+model read {
+  user_id    String   @db.VarChar(100)
+  post_id    String   @db.VarChar(100)
+  created_at DateTime @default(now()) @db.DateTime(0)
+  post       post     @relation(fields: [post_id], references: [id])
+  user       user     @relation(fields: [user_id], references: [id])
+
+  @@id([user_id, post_id])
+  @@index([post_id], name: "read_FK_1")
+}
+
+model tag {
+  name         String         @id @db.VarChar(100)
+  created_at   DateTime       @default(now()) @db.DateTime(0)
+  post_tag_ref post_tag_ref[]
+}
+
 model user {
-  id           String  @id @db.VarChar(100)
-  password     String? @db.VarChar(100)
-  email        String  @db.VarChar(100)
-  introduction String? @db.Text
-  image        String? @db.VarChar(100)
-  velog_name   String  @db.VarChar(100)
+  id           String       @id @db.VarChar(100)
+  password     String?      @db.VarChar(100)
+  email        String       @db.VarChar(100)
+  introduction String?      @db.Text
+  image        String?      @db.VarChar(100)
+  velog_name   String       @db.VarChar(100)
   social       Json?
+  comment      comment[]
+  interest     interest[]
+  post         post[]
+  post_group   post_group[]
+  read         read[]
+}
+
+model post_group {
+  id         String   @id @db.VarChar(100)
+  name       String   @db.VarChar(200)
+  user_id    String   @db.VarChar(100)
+  priority   Json?
+  created_at DateTime @default(now()) @db.DateTime(0)
+  user       user     @relation(fields: [user_id], references: [id])
+
+  @@index([user_id], name: "series_FK")
 }

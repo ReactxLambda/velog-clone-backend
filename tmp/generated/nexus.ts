@@ -33,6 +33,521 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  commentCreateManyCommentInput: { // input type
+    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
+    id: string; // String!
+    post_id: string; // String!
+    text: string; // String!
+    user_id: string; // String!
+  }
+  commentCreateManyCommentInputEnvelope: { // input type
+    data?: NexusGenInputs['commentCreateManyCommentInput'][] | null; // [commentCreateManyCommentInput!]
+    skipDuplicates?: boolean | null; // Boolean
+  }
+  commentCreateManyPostInput: { // input type
+    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
+    id: string; // String!
+    reply_to: string; // String!
+    text: string; // String!
+    user_id: string; // String!
+  }
+  commentCreateManyPostInputEnvelope: { // input type
+    data?: NexusGenInputs['commentCreateManyPostInput'][] | null; // [commentCreateManyPostInput!]
+    skipDuplicates?: boolean | null; // Boolean
+  }
+  commentCreateManyUserInput: { // input type
+    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
+    id: string; // String!
+    post_id: string; // String!
+    reply_to: string; // String!
+    text: string; // String!
+  }
+  commentCreateManyUserInputEnvelope: { // input type
+    data?: NexusGenInputs['commentCreateManyUserInput'][] | null; // [commentCreateManyUserInput!]
+    skipDuplicates?: boolean | null; // Boolean
+  }
+  commentCreateNestedManyWithoutCommentInput: { // input type
+    connect?: NexusGenInputs['commentWhereUniqueInput'][] | null; // [commentWhereUniqueInput!]
+    connectOrCreate?: NexusGenInputs['commentCreateOrConnectWithoutCommentInput'][] | null; // [commentCreateOrConnectWithoutCommentInput!]
+    create?: NexusGenInputs['commentCreateWithoutCommentInput'][] | null; // [commentCreateWithoutCommentInput!]
+    createMany?: NexusGenInputs['commentCreateManyCommentInputEnvelope'] | null; // commentCreateManyCommentInputEnvelope
+  }
+  commentCreateNestedManyWithoutPostInput: { // input type
+    connect?: NexusGenInputs['commentWhereUniqueInput'][] | null; // [commentWhereUniqueInput!]
+    connectOrCreate?: NexusGenInputs['commentCreateOrConnectWithoutPostInput'][] | null; // [commentCreateOrConnectWithoutPostInput!]
+    create?: NexusGenInputs['commentCreateWithoutPostInput'][] | null; // [commentCreateWithoutPostInput!]
+    createMany?: NexusGenInputs['commentCreateManyPostInputEnvelope'] | null; // commentCreateManyPostInputEnvelope
+  }
+  commentCreateNestedManyWithoutUserInput: { // input type
+    connect?: NexusGenInputs['commentWhereUniqueInput'][] | null; // [commentWhereUniqueInput!]
+    connectOrCreate?: NexusGenInputs['commentCreateOrConnectWithoutUserInput'][] | null; // [commentCreateOrConnectWithoutUserInput!]
+    create?: NexusGenInputs['commentCreateWithoutUserInput'][] | null; // [commentCreateWithoutUserInput!]
+    createMany?: NexusGenInputs['commentCreateManyUserInputEnvelope'] | null; // commentCreateManyUserInputEnvelope
+  }
+  commentCreateNestedOneWithoutOther_commentInput: { // input type
+    connect?: NexusGenInputs['commentWhereUniqueInput'] | null; // commentWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['commentCreateOrConnectWithoutOther_commentInput'] | null; // commentCreateOrConnectWithoutOther_commentInput
+    create?: NexusGenInputs['commentCreateWithoutOther_commentInput'] | null; // commentCreateWithoutOther_commentInput
+  }
+  commentCreateOrConnectWithoutCommentInput: { // input type
+    create: NexusGenInputs['commentCreateWithoutCommentInput']; // commentCreateWithoutCommentInput!
+    where: NexusGenInputs['commentWhereUniqueInput']; // commentWhereUniqueInput!
+  }
+  commentCreateOrConnectWithoutOther_commentInput: { // input type
+    create: NexusGenInputs['commentCreateWithoutOther_commentInput']; // commentCreateWithoutOther_commentInput!
+    where: NexusGenInputs['commentWhereUniqueInput']; // commentWhereUniqueInput!
+  }
+  commentCreateOrConnectWithoutPostInput: { // input type
+    create: NexusGenInputs['commentCreateWithoutPostInput']; // commentCreateWithoutPostInput!
+    where: NexusGenInputs['commentWhereUniqueInput']; // commentWhereUniqueInput!
+  }
+  commentCreateOrConnectWithoutUserInput: { // input type
+    create: NexusGenInputs['commentCreateWithoutUserInput']; // commentCreateWithoutUserInput!
+    where: NexusGenInputs['commentWhereUniqueInput']; // commentWhereUniqueInput!
+  }
+  commentCreateWithoutCommentInput: { // input type
+    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
+    id: string; // String!
+    other_comment?: NexusGenInputs['commentCreateNestedManyWithoutCommentInput'] | null; // commentCreateNestedManyWithoutCommentInput
+    post: NexusGenInputs['postCreateNestedOneWithoutCommentInput']; // postCreateNestedOneWithoutCommentInput!
+    text: string; // String!
+    user: NexusGenInputs['userCreateNestedOneWithoutCommentInput']; // userCreateNestedOneWithoutCommentInput!
+  }
+  commentCreateWithoutOther_commentInput: { // input type
+    comment: NexusGenInputs['commentCreateNestedOneWithoutOther_commentInput']; // commentCreateNestedOneWithoutOther_commentInput!
+    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
+    id: string; // String!
+    post: NexusGenInputs['postCreateNestedOneWithoutCommentInput']; // postCreateNestedOneWithoutCommentInput!
+    text: string; // String!
+    user: NexusGenInputs['userCreateNestedOneWithoutCommentInput']; // userCreateNestedOneWithoutCommentInput!
+  }
+  commentCreateWithoutPostInput: { // input type
+    comment: NexusGenInputs['commentCreateNestedOneWithoutOther_commentInput']; // commentCreateNestedOneWithoutOther_commentInput!
+    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
+    id: string; // String!
+    other_comment?: NexusGenInputs['commentCreateNestedManyWithoutCommentInput'] | null; // commentCreateNestedManyWithoutCommentInput
+    text: string; // String!
+    user: NexusGenInputs['userCreateNestedOneWithoutCommentInput']; // userCreateNestedOneWithoutCommentInput!
+  }
+  commentCreateWithoutUserInput: { // input type
+    comment: NexusGenInputs['commentCreateNestedOneWithoutOther_commentInput']; // commentCreateNestedOneWithoutOther_commentInput!
+    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
+    id: string; // String!
+    other_comment?: NexusGenInputs['commentCreateNestedManyWithoutCommentInput'] | null; // commentCreateNestedManyWithoutCommentInput
+    post: NexusGenInputs['postCreateNestedOneWithoutCommentInput']; // postCreateNestedOneWithoutCommentInput!
+    text: string; // String!
+  }
+  commentWhereUniqueInput: { // input type
+    id?: string | null; // String
+  }
+  interestCreateManyPostInput: { // input type
+    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
+    user_id: string; // String!
+  }
+  interestCreateManyPostInputEnvelope: { // input type
+    data?: NexusGenInputs['interestCreateManyPostInput'][] | null; // [interestCreateManyPostInput!]
+    skipDuplicates?: boolean | null; // Boolean
+  }
+  interestCreateManyUserInput: { // input type
+    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
+    post_id: string; // String!
+  }
+  interestCreateManyUserInputEnvelope: { // input type
+    data?: NexusGenInputs['interestCreateManyUserInput'][] | null; // [interestCreateManyUserInput!]
+    skipDuplicates?: boolean | null; // Boolean
+  }
+  interestCreateNestedManyWithoutPostInput: { // input type
+    connect?: NexusGenInputs['interestWhereUniqueInput'][] | null; // [interestWhereUniqueInput!]
+    connectOrCreate?: NexusGenInputs['interestCreateOrConnectWithoutPostInput'][] | null; // [interestCreateOrConnectWithoutPostInput!]
+    create?: NexusGenInputs['interestCreateWithoutPostInput'][] | null; // [interestCreateWithoutPostInput!]
+    createMany?: NexusGenInputs['interestCreateManyPostInputEnvelope'] | null; // interestCreateManyPostInputEnvelope
+  }
+  interestCreateNestedManyWithoutUserInput: { // input type
+    connect?: NexusGenInputs['interestWhereUniqueInput'][] | null; // [interestWhereUniqueInput!]
+    connectOrCreate?: NexusGenInputs['interestCreateOrConnectWithoutUserInput'][] | null; // [interestCreateOrConnectWithoutUserInput!]
+    create?: NexusGenInputs['interestCreateWithoutUserInput'][] | null; // [interestCreateWithoutUserInput!]
+    createMany?: NexusGenInputs['interestCreateManyUserInputEnvelope'] | null; // interestCreateManyUserInputEnvelope
+  }
+  interestCreateOrConnectWithoutPostInput: { // input type
+    create: NexusGenInputs['interestCreateWithoutPostInput']; // interestCreateWithoutPostInput!
+    where: NexusGenInputs['interestWhereUniqueInput']; // interestWhereUniqueInput!
+  }
+  interestCreateOrConnectWithoutUserInput: { // input type
+    create: NexusGenInputs['interestCreateWithoutUserInput']; // interestCreateWithoutUserInput!
+    where: NexusGenInputs['interestWhereUniqueInput']; // interestWhereUniqueInput!
+  }
+  interestCreateWithoutPostInput: { // input type
+    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
+    user: NexusGenInputs['userCreateNestedOneWithoutInterestInput']; // userCreateNestedOneWithoutInterestInput!
+  }
+  interestCreateWithoutUserInput: { // input type
+    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
+    post: NexusGenInputs['postCreateNestedOneWithoutInterestInput']; // postCreateNestedOneWithoutInterestInput!
+  }
+  interestUser_idPost_idCompoundUniqueInput: { // input type
+    post_id: string; // String!
+    user_id: string; // String!
+  }
+  interestWhereUniqueInput: { // input type
+    user_id_post_id?: NexusGenInputs['interestUser_idPost_idCompoundUniqueInput'] | null; // interestUser_idPost_idCompoundUniqueInput
+  }
+  postCreateInput: { // input type
+    comment?: NexusGenInputs['commentCreateNestedManyWithoutPostInput'] | null; // commentCreateNestedManyWithoutPostInput
+    content: string; // String!
+    created_at: NexusGenScalars['DateTime']; // DateTime!
+    hidden?: boolean | null; // Boolean
+    id: string; // String!
+    interest?: NexusGenInputs['interestCreateNestedManyWithoutPostInput'] | null; // interestCreateNestedManyWithoutPostInput
+    post_tag_ref?: NexusGenInputs['post_tag_refCreateNestedManyWithoutPostInput'] | null; // post_tag_refCreateNestedManyWithoutPostInput
+    post_temp?: NexusGenInputs['post_tempCreateNestedOneWithoutPostInput'] | null; // post_tempCreateNestedOneWithoutPostInput
+    pre_content: string; // String!
+    read?: NexusGenInputs['readCreateNestedManyWithoutPostInput'] | null; // readCreateNestedManyWithoutPostInput
+    thumbnail?: string | null; // String
+    title: string; // String!
+    url: string; // String!
+    user: NexusGenInputs['userCreateNestedOneWithoutPostInput']; // userCreateNestedOneWithoutPostInput!
+  }
+  postCreateManyUserInput: { // input type
+    content: string; // String!
+    created_at: NexusGenScalars['DateTime']; // DateTime!
+    hidden?: boolean | null; // Boolean
+    id: string; // String!
+    pre_content: string; // String!
+    thumbnail?: string | null; // String
+    title: string; // String!
+    url: string; // String!
+  }
+  postCreateManyUserInputEnvelope: { // input type
+    data?: NexusGenInputs['postCreateManyUserInput'][] | null; // [postCreateManyUserInput!]
+    skipDuplicates?: boolean | null; // Boolean
+  }
+  postCreateNestedManyWithoutUserInput: { // input type
+    connect?: NexusGenInputs['postWhereUniqueInput'][] | null; // [postWhereUniqueInput!]
+    connectOrCreate?: NexusGenInputs['postCreateOrConnectWithoutUserInput'][] | null; // [postCreateOrConnectWithoutUserInput!]
+    create?: NexusGenInputs['postCreateWithoutUserInput'][] | null; // [postCreateWithoutUserInput!]
+    createMany?: NexusGenInputs['postCreateManyUserInputEnvelope'] | null; // postCreateManyUserInputEnvelope
+  }
+  postCreateNestedOneWithoutCommentInput: { // input type
+    connect?: NexusGenInputs['postWhereUniqueInput'] | null; // postWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['postCreateOrConnectWithoutCommentInput'] | null; // postCreateOrConnectWithoutCommentInput
+    create?: NexusGenInputs['postCreateWithoutCommentInput'] | null; // postCreateWithoutCommentInput
+  }
+  postCreateNestedOneWithoutInterestInput: { // input type
+    connect?: NexusGenInputs['postWhereUniqueInput'] | null; // postWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['postCreateOrConnectWithoutInterestInput'] | null; // postCreateOrConnectWithoutInterestInput
+    create?: NexusGenInputs['postCreateWithoutInterestInput'] | null; // postCreateWithoutInterestInput
+  }
+  postCreateNestedOneWithoutReadInput: { // input type
+    connect?: NexusGenInputs['postWhereUniqueInput'] | null; // postWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['postCreateOrConnectWithoutReadInput'] | null; // postCreateOrConnectWithoutReadInput
+    create?: NexusGenInputs['postCreateWithoutReadInput'] | null; // postCreateWithoutReadInput
+  }
+  postCreateOrConnectWithoutCommentInput: { // input type
+    create: NexusGenInputs['postCreateWithoutCommentInput']; // postCreateWithoutCommentInput!
+    where: NexusGenInputs['postWhereUniqueInput']; // postWhereUniqueInput!
+  }
+  postCreateOrConnectWithoutInterestInput: { // input type
+    create: NexusGenInputs['postCreateWithoutInterestInput']; // postCreateWithoutInterestInput!
+    where: NexusGenInputs['postWhereUniqueInput']; // postWhereUniqueInput!
+  }
+  postCreateOrConnectWithoutReadInput: { // input type
+    create: NexusGenInputs['postCreateWithoutReadInput']; // postCreateWithoutReadInput!
+    where: NexusGenInputs['postWhereUniqueInput']; // postWhereUniqueInput!
+  }
+  postCreateOrConnectWithoutUserInput: { // input type
+    create: NexusGenInputs['postCreateWithoutUserInput']; // postCreateWithoutUserInput!
+    where: NexusGenInputs['postWhereUniqueInput']; // postWhereUniqueInput!
+  }
+  postCreateWithoutCommentInput: { // input type
+    content: string; // String!
+    created_at: NexusGenScalars['DateTime']; // DateTime!
+    hidden?: boolean | null; // Boolean
+    id: string; // String!
+    interest?: NexusGenInputs['interestCreateNestedManyWithoutPostInput'] | null; // interestCreateNestedManyWithoutPostInput
+    post_tag_ref?: NexusGenInputs['post_tag_refCreateNestedManyWithoutPostInput'] | null; // post_tag_refCreateNestedManyWithoutPostInput
+    post_temp?: NexusGenInputs['post_tempCreateNestedOneWithoutPostInput'] | null; // post_tempCreateNestedOneWithoutPostInput
+    pre_content: string; // String!
+    read?: NexusGenInputs['readCreateNestedManyWithoutPostInput'] | null; // readCreateNestedManyWithoutPostInput
+    thumbnail?: string | null; // String
+    title: string; // String!
+    url: string; // String!
+    user: NexusGenInputs['userCreateNestedOneWithoutPostInput']; // userCreateNestedOneWithoutPostInput!
+  }
+  postCreateWithoutInterestInput: { // input type
+    comment?: NexusGenInputs['commentCreateNestedManyWithoutPostInput'] | null; // commentCreateNestedManyWithoutPostInput
+    content: string; // String!
+    created_at: NexusGenScalars['DateTime']; // DateTime!
+    hidden?: boolean | null; // Boolean
+    id: string; // String!
+    post_tag_ref?: NexusGenInputs['post_tag_refCreateNestedManyWithoutPostInput'] | null; // post_tag_refCreateNestedManyWithoutPostInput
+    post_temp?: NexusGenInputs['post_tempCreateNestedOneWithoutPostInput'] | null; // post_tempCreateNestedOneWithoutPostInput
+    pre_content: string; // String!
+    read?: NexusGenInputs['readCreateNestedManyWithoutPostInput'] | null; // readCreateNestedManyWithoutPostInput
+    thumbnail?: string | null; // String
+    title: string; // String!
+    url: string; // String!
+    user: NexusGenInputs['userCreateNestedOneWithoutPostInput']; // userCreateNestedOneWithoutPostInput!
+  }
+  postCreateWithoutReadInput: { // input type
+    comment?: NexusGenInputs['commentCreateNestedManyWithoutPostInput'] | null; // commentCreateNestedManyWithoutPostInput
+    content: string; // String!
+    created_at: NexusGenScalars['DateTime']; // DateTime!
+    hidden?: boolean | null; // Boolean
+    id: string; // String!
+    interest?: NexusGenInputs['interestCreateNestedManyWithoutPostInput'] | null; // interestCreateNestedManyWithoutPostInput
+    post_tag_ref?: NexusGenInputs['post_tag_refCreateNestedManyWithoutPostInput'] | null; // post_tag_refCreateNestedManyWithoutPostInput
+    post_temp?: NexusGenInputs['post_tempCreateNestedOneWithoutPostInput'] | null; // post_tempCreateNestedOneWithoutPostInput
+    pre_content: string; // String!
+    thumbnail?: string | null; // String
+    title: string; // String!
+    url: string; // String!
+    user: NexusGenInputs['userCreateNestedOneWithoutPostInput']; // userCreateNestedOneWithoutPostInput!
+  }
+  postCreateWithoutUserInput: { // input type
+    comment?: NexusGenInputs['commentCreateNestedManyWithoutPostInput'] | null; // commentCreateNestedManyWithoutPostInput
+    content: string; // String!
+    created_at: NexusGenScalars['DateTime']; // DateTime!
+    hidden?: boolean | null; // Boolean
+    id: string; // String!
+    interest?: NexusGenInputs['interestCreateNestedManyWithoutPostInput'] | null; // interestCreateNestedManyWithoutPostInput
+    post_tag_ref?: NexusGenInputs['post_tag_refCreateNestedManyWithoutPostInput'] | null; // post_tag_refCreateNestedManyWithoutPostInput
+    post_temp?: NexusGenInputs['post_tempCreateNestedOneWithoutPostInput'] | null; // post_tempCreateNestedOneWithoutPostInput
+    pre_content: string; // String!
+    read?: NexusGenInputs['readCreateNestedManyWithoutPostInput'] | null; // readCreateNestedManyWithoutPostInput
+    thumbnail?: string | null; // String
+    title: string; // String!
+    url: string; // String!
+  }
+  postWhereUniqueInput: { // input type
+    id?: string | null; // String
+  }
+  post_groupCreateManyUserInput: { // input type
+    created_at: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // String!
+    name: string; // String!
+    priority?: NexusGenScalars['Json'] | null; // Json
+  }
+  post_groupCreateManyUserInputEnvelope: { // input type
+    data?: NexusGenInputs['post_groupCreateManyUserInput'][] | null; // [post_groupCreateManyUserInput!]
+    skipDuplicates?: boolean | null; // Boolean
+  }
+  post_groupCreateNestedManyWithoutUserInput: { // input type
+    connect?: NexusGenInputs['post_groupWhereUniqueInput'][] | null; // [post_groupWhereUniqueInput!]
+    connectOrCreate?: NexusGenInputs['post_groupCreateOrConnectWithoutUserInput'][] | null; // [post_groupCreateOrConnectWithoutUserInput!]
+    create?: NexusGenInputs['post_groupCreateWithoutUserInput'][] | null; // [post_groupCreateWithoutUserInput!]
+    createMany?: NexusGenInputs['post_groupCreateManyUserInputEnvelope'] | null; // post_groupCreateManyUserInputEnvelope
+  }
+  post_groupCreateOrConnectWithoutUserInput: { // input type
+    create: NexusGenInputs['post_groupCreateWithoutUserInput']; // post_groupCreateWithoutUserInput!
+    where: NexusGenInputs['post_groupWhereUniqueInput']; // post_groupWhereUniqueInput!
+  }
+  post_groupCreateWithoutUserInput: { // input type
+    created_at: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // String!
+    name: string; // String!
+    priority?: NexusGenScalars['Json'] | null; // Json
+  }
+  post_groupWhereUniqueInput: { // input type
+    id?: string | null; // String
+  }
+  post_tag_refCreateManyPostInput: { // input type
+    tag_name: string; // String!
+  }
+  post_tag_refCreateManyPostInputEnvelope: { // input type
+    data?: NexusGenInputs['post_tag_refCreateManyPostInput'][] | null; // [post_tag_refCreateManyPostInput!]
+    skipDuplicates?: boolean | null; // Boolean
+  }
+  post_tag_refCreateNestedManyWithoutPostInput: { // input type
+    connect?: NexusGenInputs['post_tag_refWhereUniqueInput'][] | null; // [post_tag_refWhereUniqueInput!]
+    connectOrCreate?: NexusGenInputs['post_tag_refCreateOrConnectWithoutPostInput'][] | null; // [post_tag_refCreateOrConnectWithoutPostInput!]
+    create?: NexusGenInputs['post_tag_refCreateWithoutPostInput'][] | null; // [post_tag_refCreateWithoutPostInput!]
+    createMany?: NexusGenInputs['post_tag_refCreateManyPostInputEnvelope'] | null; // post_tag_refCreateManyPostInputEnvelope
+  }
+  post_tag_refCreateOrConnectWithoutPostInput: { // input type
+    create: NexusGenInputs['post_tag_refCreateWithoutPostInput']; // post_tag_refCreateWithoutPostInput!
+    where: NexusGenInputs['post_tag_refWhereUniqueInput']; // post_tag_refWhereUniqueInput!
+  }
+  post_tag_refCreateWithoutPostInput: { // input type
+    tag: NexusGenInputs['tagCreateNestedOneWithoutPost_tag_refInput']; // tagCreateNestedOneWithoutPost_tag_refInput!
+  }
+  post_tag_refTag_namePost_idCompoundUniqueInput: { // input type
+    post_id: string; // String!
+    tag_name: string; // String!
+  }
+  post_tag_refWhereUniqueInput: { // input type
+    tag_name_post_id?: NexusGenInputs['post_tag_refTag_namePost_idCompoundUniqueInput'] | null; // post_tag_refTag_namePost_idCompoundUniqueInput
+  }
+  post_tempCreateNestedOneWithoutPostInput: { // input type
+    connect?: NexusGenInputs['post_tempWhereUniqueInput'] | null; // post_tempWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['post_tempCreateOrConnectWithoutPostInput'] | null; // post_tempCreateOrConnectWithoutPostInput
+    create?: NexusGenInputs['post_tempCreateWithoutPostInput'] | null; // post_tempCreateWithoutPostInput
+  }
+  post_tempCreateOrConnectWithoutPostInput: { // input type
+    create: NexusGenInputs['post_tempCreateWithoutPostInput']; // post_tempCreateWithoutPostInput!
+    where: NexusGenInputs['post_tempWhereUniqueInput']; // post_tempWhereUniqueInput!
+  }
+  post_tempCreateWithoutPostInput: { // input type
+    content?: string | null; // String
+    title?: string | null; // String
+  }
+  post_tempWhereUniqueInput: { // input type
+    post_id?: string | null; // String
+  }
+  readCreateManyPostInput: { // input type
+    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
+    user_id: string; // String!
+  }
+  readCreateManyPostInputEnvelope: { // input type
+    data?: NexusGenInputs['readCreateManyPostInput'][] | null; // [readCreateManyPostInput!]
+    skipDuplicates?: boolean | null; // Boolean
+  }
+  readCreateManyUserInput: { // input type
+    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
+    post_id: string; // String!
+  }
+  readCreateManyUserInputEnvelope: { // input type
+    data?: NexusGenInputs['readCreateManyUserInput'][] | null; // [readCreateManyUserInput!]
+    skipDuplicates?: boolean | null; // Boolean
+  }
+  readCreateNestedManyWithoutPostInput: { // input type
+    connect?: NexusGenInputs['readWhereUniqueInput'][] | null; // [readWhereUniqueInput!]
+    connectOrCreate?: NexusGenInputs['readCreateOrConnectWithoutPostInput'][] | null; // [readCreateOrConnectWithoutPostInput!]
+    create?: NexusGenInputs['readCreateWithoutPostInput'][] | null; // [readCreateWithoutPostInput!]
+    createMany?: NexusGenInputs['readCreateManyPostInputEnvelope'] | null; // readCreateManyPostInputEnvelope
+  }
+  readCreateNestedManyWithoutUserInput: { // input type
+    connect?: NexusGenInputs['readWhereUniqueInput'][] | null; // [readWhereUniqueInput!]
+    connectOrCreate?: NexusGenInputs['readCreateOrConnectWithoutUserInput'][] | null; // [readCreateOrConnectWithoutUserInput!]
+    create?: NexusGenInputs['readCreateWithoutUserInput'][] | null; // [readCreateWithoutUserInput!]
+    createMany?: NexusGenInputs['readCreateManyUserInputEnvelope'] | null; // readCreateManyUserInputEnvelope
+  }
+  readCreateOrConnectWithoutPostInput: { // input type
+    create: NexusGenInputs['readCreateWithoutPostInput']; // readCreateWithoutPostInput!
+    where: NexusGenInputs['readWhereUniqueInput']; // readWhereUniqueInput!
+  }
+  readCreateOrConnectWithoutUserInput: { // input type
+    create: NexusGenInputs['readCreateWithoutUserInput']; // readCreateWithoutUserInput!
+    where: NexusGenInputs['readWhereUniqueInput']; // readWhereUniqueInput!
+  }
+  readCreateWithoutPostInput: { // input type
+    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
+    user: NexusGenInputs['userCreateNestedOneWithoutReadInput']; // userCreateNestedOneWithoutReadInput!
+  }
+  readCreateWithoutUserInput: { // input type
+    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
+    post: NexusGenInputs['postCreateNestedOneWithoutReadInput']; // postCreateNestedOneWithoutReadInput!
+  }
+  readUser_idPost_idCompoundUniqueInput: { // input type
+    post_id: string; // String!
+    user_id: string; // String!
+  }
+  readWhereUniqueInput: { // input type
+    user_id_post_id?: NexusGenInputs['readUser_idPost_idCompoundUniqueInput'] | null; // readUser_idPost_idCompoundUniqueInput
+  }
+  tagCreateNestedOneWithoutPost_tag_refInput: { // input type
+    connect?: NexusGenInputs['tagWhereUniqueInput'] | null; // tagWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['tagCreateOrConnectWithoutPost_tag_refInput'] | null; // tagCreateOrConnectWithoutPost_tag_refInput
+    create?: NexusGenInputs['tagCreateWithoutPost_tag_refInput'] | null; // tagCreateWithoutPost_tag_refInput
+  }
+  tagCreateOrConnectWithoutPost_tag_refInput: { // input type
+    create: NexusGenInputs['tagCreateWithoutPost_tag_refInput']; // tagCreateWithoutPost_tag_refInput!
+    where: NexusGenInputs['tagWhereUniqueInput']; // tagWhereUniqueInput!
+  }
+  tagCreateWithoutPost_tag_refInput: { // input type
+    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
+    name: string; // String!
+  }
+  tagWhereUniqueInput: { // input type
+    name?: string | null; // String
+  }
+  userCreateNestedOneWithoutCommentInput: { // input type
+    connect?: NexusGenInputs['userWhereUniqueInput'] | null; // userWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['userCreateOrConnectWithoutCommentInput'] | null; // userCreateOrConnectWithoutCommentInput
+    create?: NexusGenInputs['userCreateWithoutCommentInput'] | null; // userCreateWithoutCommentInput
+  }
+  userCreateNestedOneWithoutInterestInput: { // input type
+    connect?: NexusGenInputs['userWhereUniqueInput'] | null; // userWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['userCreateOrConnectWithoutInterestInput'] | null; // userCreateOrConnectWithoutInterestInput
+    create?: NexusGenInputs['userCreateWithoutInterestInput'] | null; // userCreateWithoutInterestInput
+  }
+  userCreateNestedOneWithoutPostInput: { // input type
+    connect?: NexusGenInputs['userWhereUniqueInput'] | null; // userWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['userCreateOrConnectWithoutPostInput'] | null; // userCreateOrConnectWithoutPostInput
+    create?: NexusGenInputs['userCreateWithoutPostInput'] | null; // userCreateWithoutPostInput
+  }
+  userCreateNestedOneWithoutReadInput: { // input type
+    connect?: NexusGenInputs['userWhereUniqueInput'] | null; // userWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['userCreateOrConnectWithoutReadInput'] | null; // userCreateOrConnectWithoutReadInput
+    create?: NexusGenInputs['userCreateWithoutReadInput'] | null; // userCreateWithoutReadInput
+  }
+  userCreateOrConnectWithoutCommentInput: { // input type
+    create: NexusGenInputs['userCreateWithoutCommentInput']; // userCreateWithoutCommentInput!
+    where: NexusGenInputs['userWhereUniqueInput']; // userWhereUniqueInput!
+  }
+  userCreateOrConnectWithoutInterestInput: { // input type
+    create: NexusGenInputs['userCreateWithoutInterestInput']; // userCreateWithoutInterestInput!
+    where: NexusGenInputs['userWhereUniqueInput']; // userWhereUniqueInput!
+  }
+  userCreateOrConnectWithoutPostInput: { // input type
+    create: NexusGenInputs['userCreateWithoutPostInput']; // userCreateWithoutPostInput!
+    where: NexusGenInputs['userWhereUniqueInput']; // userWhereUniqueInput!
+  }
+  userCreateOrConnectWithoutReadInput: { // input type
+    create: NexusGenInputs['userCreateWithoutReadInput']; // userCreateWithoutReadInput!
+    where: NexusGenInputs['userWhereUniqueInput']; // userWhereUniqueInput!
+  }
+  userCreateWithoutCommentInput: { // input type
+    email: string; // String!
+    id: string; // String!
+    image?: string | null; // String
+    interest?: NexusGenInputs['interestCreateNestedManyWithoutUserInput'] | null; // interestCreateNestedManyWithoutUserInput
+    introduction?: string | null; // String
+    password?: string | null; // String
+    post?: NexusGenInputs['postCreateNestedManyWithoutUserInput'] | null; // postCreateNestedManyWithoutUserInput
+    post_group?: NexusGenInputs['post_groupCreateNestedManyWithoutUserInput'] | null; // post_groupCreateNestedManyWithoutUserInput
+    read?: NexusGenInputs['readCreateNestedManyWithoutUserInput'] | null; // readCreateNestedManyWithoutUserInput
+    social?: NexusGenScalars['Json'] | null; // Json
+    velog_name: string; // String!
+  }
+  userCreateWithoutInterestInput: { // input type
+    comment?: NexusGenInputs['commentCreateNestedManyWithoutUserInput'] | null; // commentCreateNestedManyWithoutUserInput
+    email: string; // String!
+    id: string; // String!
+    image?: string | null; // String
+    introduction?: string | null; // String
+    password?: string | null; // String
+    post?: NexusGenInputs['postCreateNestedManyWithoutUserInput'] | null; // postCreateNestedManyWithoutUserInput
+    post_group?: NexusGenInputs['post_groupCreateNestedManyWithoutUserInput'] | null; // post_groupCreateNestedManyWithoutUserInput
+    read?: NexusGenInputs['readCreateNestedManyWithoutUserInput'] | null; // readCreateNestedManyWithoutUserInput
+    social?: NexusGenScalars['Json'] | null; // Json
+    velog_name: string; // String!
+  }
+  userCreateWithoutPostInput: { // input type
+    comment?: NexusGenInputs['commentCreateNestedManyWithoutUserInput'] | null; // commentCreateNestedManyWithoutUserInput
+    email: string; // String!
+    id: string; // String!
+    image?: string | null; // String
+    interest?: NexusGenInputs['interestCreateNestedManyWithoutUserInput'] | null; // interestCreateNestedManyWithoutUserInput
+    introduction?: string | null; // String
+    password?: string | null; // String
+    post_group?: NexusGenInputs['post_groupCreateNestedManyWithoutUserInput'] | null; // post_groupCreateNestedManyWithoutUserInput
+    read?: NexusGenInputs['readCreateNestedManyWithoutUserInput'] | null; // readCreateNestedManyWithoutUserInput
+    social?: NexusGenScalars['Json'] | null; // Json
+    velog_name: string; // String!
+  }
+  userCreateWithoutReadInput: { // input type
+    comment?: NexusGenInputs['commentCreateNestedManyWithoutUserInput'] | null; // commentCreateNestedManyWithoutUserInput
+    email: string; // String!
+    id: string; // String!
+    image?: string | null; // String
+    interest?: NexusGenInputs['interestCreateNestedManyWithoutUserInput'] | null; // interestCreateNestedManyWithoutUserInput
+    introduction?: string | null; // String
+    password?: string | null; // String
+    post?: NexusGenInputs['postCreateNestedManyWithoutUserInput'] | null; // postCreateNestedManyWithoutUserInput
+    post_group?: NexusGenInputs['post_groupCreateNestedManyWithoutUserInput'] | null; // post_groupCreateNestedManyWithoutUserInput
+    social?: NexusGenScalars['Json'] | null; // Json
+    velog_name: string; // String!
+  }
   userWhereUniqueInput: { // input type
     id?: string | null; // String
   }
@@ -48,17 +563,57 @@ export interface NexusGenScalars {
   Boolean: boolean
   ID: string
   BigInt: any
-  Bytes: any
+  DateTime: any
   Json: any
 }
 
 export interface NexusGenObjects {
+  Mutation: {};
   Query: {};
+  comment: { // root type
+    created_at: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // String!
+    reply_to: string; // String!
+    text: string; // String!
+  }
+  interest: { // root type
+    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  post: { // root type
+    content: string; // String!
+    created_at: NexusGenScalars['DateTime']; // DateTime!
+    hidden: boolean; // Boolean!
+    id: string; // String!
+    pre_content: string; // String!
+    thumbnail?: string | null; // String
+    title: string; // String!
+    url: string; // String!
+    user_id: string; // String!
+  }
+  post_group: { // root type
+    created_at: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // String!
+    name: string; // String!
+    priority?: NexusGenScalars['Json'] | null; // Json
+  }
+  post_tag_ref: {};
+  post_temp: { // root type
+    content?: string | null; // String
+    post_id: string; // String!
+    title?: string | null; // String
+  }
+  read: { // root type
+    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  tag: { // root type
+    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
+    name: string; // String!
+  }
   user: { // root type
     email: string; // String!
     id: string; // String!
     image?: string | null; // String
-    introduction?: NexusGenScalars['Bytes'] | null; // Bytes
+    introduction?: string | null; // String
     social?: NexusGenScalars['Json'] | null; // Json
     velog_name: string; // String!
   }
@@ -75,37 +630,305 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
+  Mutation: { // field return type
+    createOnepost: NexusGenRootTypes['post']; // post!
+  }
   Query: { // field return type
+    comment: NexusGenRootTypes['comment'] | null; // comment
+    comments: NexusGenRootTypes['comment'][]; // [comment!]!
+    interest: NexusGenRootTypes['interest'] | null; // interest
+    interests: NexusGenRootTypes['interest'][]; // [interest!]!
+    post: NexusGenRootTypes['post'] | null; // post
+    postGroup: NexusGenRootTypes['post_group'] | null; // post_group
+    postGroups: NexusGenRootTypes['post_group'][]; // [post_group!]!
+    postTagRef: NexusGenRootTypes['post_tag_ref'] | null; // post_tag_ref
+    postTagRefs: NexusGenRootTypes['post_tag_ref'][]; // [post_tag_ref!]!
+    postTemp: NexusGenRootTypes['post_temp'] | null; // post_temp
+    postTemps: NexusGenRootTypes['post_temp'][]; // [post_temp!]!
+    posts: NexusGenRootTypes['post'][]; // [post!]!
+    read: NexusGenRootTypes['read'] | null; // read
+    reads: NexusGenRootTypes['read'][]; // [read!]!
+    tag: NexusGenRootTypes['tag'] | null; // tag
+    tags: NexusGenRootTypes['tag'][]; // [tag!]!
     user: NexusGenRootTypes['user'] | null; // user
+    users: NexusGenRootTypes['user'][]; // [user!]!
+  }
+  comment: { // field return type
+    comment: NexusGenRootTypes['comment']; // comment!
+    created_at: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // String!
+    other_comment: NexusGenRootTypes['comment'][]; // [comment!]!
+    post: NexusGenRootTypes['post']; // post!
+    reply_to: string; // String!
+    text: string; // String!
+    user: NexusGenRootTypes['user']; // user!
+  }
+  interest: { // field return type
+    created_at: NexusGenScalars['DateTime'] | null; // DateTime
+    post: NexusGenRootTypes['post']; // post!
+    user: NexusGenRootTypes['user']; // user!
+  }
+  post: { // field return type
+    comment: NexusGenRootTypes['comment'][]; // [comment!]!
+    content: string; // String!
+    created_at: NexusGenScalars['DateTime']; // DateTime!
+    hidden: boolean; // Boolean!
+    id: string; // String!
+    interest: NexusGenRootTypes['interest'][]; // [interest!]!
+    post_tag_ref: NexusGenRootTypes['post_tag_ref'][]; // [post_tag_ref!]!
+    post_temp: NexusGenRootTypes['post_temp'] | null; // post_temp
+    pre_content: string; // String!
+    read: NexusGenRootTypes['read'][]; // [read!]!
+    thumbnail: string | null; // String
+    title: string; // String!
+    url: string; // String!
+    user: NexusGenRootTypes['user']; // user!
+    user_id: string; // String!
+  }
+  post_group: { // field return type
+    created_at: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // String!
+    name: string; // String!
+    priority: NexusGenScalars['Json'] | null; // Json
+    user: NexusGenRootTypes['user']; // user!
+  }
+  post_tag_ref: { // field return type
+    post: NexusGenRootTypes['post']; // post!
+    tag: NexusGenRootTypes['tag']; // tag!
+  }
+  post_temp: { // field return type
+    content: string | null; // String
+    post: NexusGenRootTypes['post']; // post!
+    post_id: string; // String!
+    title: string | null; // String
+  }
+  read: { // field return type
+    created_at: NexusGenScalars['DateTime'] | null; // DateTime
+    post: NexusGenRootTypes['post']; // post!
+    user: NexusGenRootTypes['user']; // user!
+  }
+  tag: { // field return type
+    created_at: NexusGenScalars['DateTime'] | null; // DateTime
+    name: string; // String!
+    post_tag_ref: NexusGenRootTypes['post_tag_ref'][]; // [post_tag_ref!]!
   }
   user: { // field return type
     email: string; // String!
     id: string; // String!
     image: string | null; // String
-    introduction: NexusGenScalars['Bytes'] | null; // Bytes
+    introduction: string | null; // String
     social: NexusGenScalars['Json'] | null; // Json
     velog_name: string; // String!
   }
 }
 
 export interface NexusGenFieldTypeNames {
+  Mutation: { // field return type name
+    createOnepost: 'post'
+  }
   Query: { // field return type name
+    comment: 'comment'
+    comments: 'comment'
+    interest: 'interest'
+    interests: 'interest'
+    post: 'post'
+    postGroup: 'post_group'
+    postGroups: 'post_group'
+    postTagRef: 'post_tag_ref'
+    postTagRefs: 'post_tag_ref'
+    postTemp: 'post_temp'
+    postTemps: 'post_temp'
+    posts: 'post'
+    read: 'read'
+    reads: 'read'
+    tag: 'tag'
+    tags: 'tag'
     user: 'user'
+    users: 'user'
+  }
+  comment: { // field return type name
+    comment: 'comment'
+    created_at: 'DateTime'
+    id: 'String'
+    other_comment: 'comment'
+    post: 'post'
+    reply_to: 'String'
+    text: 'String'
+    user: 'user'
+  }
+  interest: { // field return type name
+    created_at: 'DateTime'
+    post: 'post'
+    user: 'user'
+  }
+  post: { // field return type name
+    comment: 'comment'
+    content: 'String'
+    created_at: 'DateTime'
+    hidden: 'Boolean'
+    id: 'String'
+    interest: 'interest'
+    post_tag_ref: 'post_tag_ref'
+    post_temp: 'post_temp'
+    pre_content: 'String'
+    read: 'read'
+    thumbnail: 'String'
+    title: 'String'
+    url: 'String'
+    user: 'user'
+    user_id: 'String'
+  }
+  post_group: { // field return type name
+    created_at: 'DateTime'
+    id: 'String'
+    name: 'String'
+    priority: 'Json'
+    user: 'user'
+  }
+  post_tag_ref: { // field return type name
+    post: 'post'
+    tag: 'tag'
+  }
+  post_temp: { // field return type name
+    content: 'String'
+    post: 'post'
+    post_id: 'String'
+    title: 'String'
+  }
+  read: { // field return type name
+    created_at: 'DateTime'
+    post: 'post'
+    user: 'user'
+  }
+  tag: { // field return type name
+    created_at: 'DateTime'
+    name: 'String'
+    post_tag_ref: 'post_tag_ref'
   }
   user: { // field return type name
     email: 'String'
     id: 'String'
     image: 'String'
-    introduction: 'Bytes'
+    introduction: 'String'
     social: 'Json'
     velog_name: 'String'
   }
 }
 
 export interface NexusGenArgTypes {
+  Mutation: {
+    createOnepost: { // args
+      data: NexusGenInputs['postCreateInput']; // postCreateInput!
+    }
+  }
   Query: {
+    comment: { // args
+      where: NexusGenInputs['commentWhereUniqueInput']; // commentWhereUniqueInput!
+    }
+    comments: { // args
+      cursor?: NexusGenInputs['commentWhereUniqueInput'] | null; // commentWhereUniqueInput
+      skip?: number | null; // Int
+      take?: number | null; // Int
+    }
+    interest: { // args
+      where: NexusGenInputs['interestWhereUniqueInput']; // interestWhereUniqueInput!
+    }
+    interests: { // args
+      cursor?: NexusGenInputs['interestWhereUniqueInput'] | null; // interestWhereUniqueInput
+      skip?: number | null; // Int
+      take?: number | null; // Int
+    }
+    post: { // args
+      where: NexusGenInputs['postWhereUniqueInput']; // postWhereUniqueInput!
+    }
+    postGroup: { // args
+      where: NexusGenInputs['post_groupWhereUniqueInput']; // post_groupWhereUniqueInput!
+    }
+    postGroups: { // args
+      cursor?: NexusGenInputs['post_groupWhereUniqueInput'] | null; // post_groupWhereUniqueInput
+      skip?: number | null; // Int
+      take?: number | null; // Int
+    }
+    postTagRef: { // args
+      where: NexusGenInputs['post_tag_refWhereUniqueInput']; // post_tag_refWhereUniqueInput!
+    }
+    postTagRefs: { // args
+      cursor?: NexusGenInputs['post_tag_refWhereUniqueInput'] | null; // post_tag_refWhereUniqueInput
+      skip?: number | null; // Int
+      take?: number | null; // Int
+    }
+    postTemp: { // args
+      where: NexusGenInputs['post_tempWhereUniqueInput']; // post_tempWhereUniqueInput!
+    }
+    postTemps: { // args
+      cursor?: NexusGenInputs['post_tempWhereUniqueInput'] | null; // post_tempWhereUniqueInput
+      skip?: number | null; // Int
+      take?: number | null; // Int
+    }
+    posts: { // args
+      cursor?: NexusGenInputs['postWhereUniqueInput'] | null; // postWhereUniqueInput
+      skip?: number | null; // Int
+      take?: number | null; // Int
+    }
+    read: { // args
+      where: NexusGenInputs['readWhereUniqueInput']; // readWhereUniqueInput!
+    }
+    reads: { // args
+      cursor?: NexusGenInputs['readWhereUniqueInput'] | null; // readWhereUniqueInput
+      skip?: number | null; // Int
+      take?: number | null; // Int
+    }
+    tag: { // args
+      where: NexusGenInputs['tagWhereUniqueInput']; // tagWhereUniqueInput!
+    }
+    tags: { // args
+      cursor?: NexusGenInputs['tagWhereUniqueInput'] | null; // tagWhereUniqueInput
+      skip?: number | null; // Int
+      take?: number | null; // Int
+    }
     user: { // args
       where: NexusGenInputs['userWhereUniqueInput']; // userWhereUniqueInput!
+    }
+    users: { // args
+      cursor?: NexusGenInputs['userWhereUniqueInput'] | null; // userWhereUniqueInput
+      skip?: number | null; // Int
+      take?: number | null; // Int
+    }
+  }
+  comment: {
+    other_comment: { // args
+      cursor?: NexusGenInputs['commentWhereUniqueInput'] | null; // commentWhereUniqueInput
+      skip?: number | null; // Int
+      take?: number | null; // Int
+    }
+  }
+  post: {
+    comment: { // args
+      cursor?: NexusGenInputs['commentWhereUniqueInput'] | null; // commentWhereUniqueInput
+      skip?: number | null; // Int
+      take?: number | null; // Int
+    }
+    interest: { // args
+      cursor?: NexusGenInputs['interestWhereUniqueInput'] | null; // interestWhereUniqueInput
+      skip?: number | null; // Int
+      take?: number | null; // Int
+    }
+    post_tag_ref: { // args
+      cursor?: NexusGenInputs['post_tag_refWhereUniqueInput'] | null; // post_tag_refWhereUniqueInput
+      skip?: number | null; // Int
+      take?: number | null; // Int
+    }
+    read: { // args
+      cursor?: NexusGenInputs['readWhereUniqueInput'] | null; // readWhereUniqueInput
+      skip?: number | null; // Int
+      take?: number | null; // Int
+    }
+  }
+  tag: {
+    post_tag_ref: { // args
+      cursor?: NexusGenInputs['post_tag_refWhereUniqueInput'] | null; // post_tag_refWhereUniqueInput
+      skip?: number | null; // Int
+      take?: number | null; // Int
     }
   }
 }
