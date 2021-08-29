@@ -84,7 +84,28 @@ model read {
   @@index([post_id], name: "read_FK_1")
 }
 
-model series {
+model tag {
+  name         String         @id @db.VarChar(100)
+  created_at   DateTime?      @db.DateTime(0)
+  post_tag_ref post_tag_ref[]
+}
+
+model user {
+  id           String       @id @db.VarChar(100)
+  password     String?      @db.VarChar(100)
+  email        String       @db.VarChar(100)
+  introduction String?      @db.Text
+  image        String?      @db.VarChar(100)
+  velog_name   String       @db.VarChar(100)
+  social       Json?
+  comment      comment[]
+  interest     interest[]
+  post         post[]
+  post_group   post_group[]
+  read         read[]
+}
+
+model post_group {
   id         String   @id @db.VarChar(100)
   name       String   @db.VarChar(200)
   user_id    String   @db.VarChar(100)
@@ -93,25 +114,4 @@ model series {
   user       user     @relation(fields: [user_id], references: [id])
 
   @@index([user_id], name: "series_FK")
-}
-
-model tag {
-  name         String         @id @db.VarChar(100)
-  created_at   DateTime?      @db.DateTime(0)
-  post_tag_ref post_tag_ref[]
-}
-
-model user {
-  id           String     @id @db.VarChar(100)
-  password     String?    @db.VarChar(100)
-  email        String     @db.VarChar(100)
-  introduction String?    @db.Text
-  image        String?    @db.VarChar(100)
-  velog_name   String     @db.VarChar(100)
-  social       Json?
-  comment      comment[]
-  interest     interest[]
-  post         post[]
-  read         read[]
-  series       series[]
 }

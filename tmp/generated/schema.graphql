@@ -7,8 +7,6 @@ The `BigInt` scalar type represents non-fractional signed whole numeric values. 
 """
 scalar BigInt
 
-scalar Bytes
-
 scalar Json
 
 type Query {
@@ -19,7 +17,7 @@ type user {
   email: String!
   id: String!
   image: String
-  introduction: Bytes
+  introduction: String
   social: Json
   velog_name: String!
 }

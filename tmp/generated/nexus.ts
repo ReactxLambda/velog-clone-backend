@@ -48,7 +48,6 @@ export interface NexusGenScalars {
   Boolean: boolean
   ID: string
   BigInt: any
-  Bytes: any
   Json: any
 }
 
@@ -58,7 +57,7 @@ export interface NexusGenObjects {
     email: string; // String!
     id: string; // String!
     image?: string | null; // String
-    introduction?: NexusGenScalars['Bytes'] | null; // Bytes
+    introduction?: string | null; // String
     social?: NexusGenScalars['Json'] | null; // Json
     velog_name: string; // String!
   }
@@ -82,7 +81,7 @@ export interface NexusGenFieldTypes {
     email: string; // String!
     id: string; // String!
     image: string | null; // String
-    introduction: NexusGenScalars['Bytes'] | null; // Bytes
+    introduction: string | null; // String
     social: NexusGenScalars['Json'] | null; // Json
     velog_name: string; // String!
   }
@@ -96,7 +95,7 @@ export interface NexusGenFieldTypeNames {
     email: 'String'
     id: 'String'
     image: 'String'
-    introduction: 'Bytes'
+    introduction: 'String'
     social: 'Json'
     velog_name: 'String'
   }
