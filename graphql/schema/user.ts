@@ -1,4 +1,4 @@
-import { objectType } from "nexus";
+import { objectType } from 'nexus'
 
 export const user = objectType({
   name: 'user',
@@ -9,5 +9,5 @@ export const user = objectType({
     t.model.introduction()
     t.model.image()
     t.model.social()
-  }
+  },
 })

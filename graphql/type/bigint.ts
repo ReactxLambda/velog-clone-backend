@@ -1,4 +1,4 @@
-import { GraphQLScalarType } from "graphql/type/definition"
+import { GraphQLScalarType } from 'graphql/type/definition'
 
 const MAX_INT = Number.MAX_SAFE_INTEGER
 const MIN_INT = Number.MIN_SAFE_INTEGER

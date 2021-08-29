@@ -8,7 +8,8 @@ import { nexusSchemaPrisma } from 'nexus-plugin-prisma/schema';
 
 import * as path from 'path';
 
-import { user } from "./graphql/schema/user/type";
+import { user,
+post, read } from "./graphql/schema/schema";
 import { GraphQLBigInt } from "./graphql/type";
 
 import Query from './graphql/query';
