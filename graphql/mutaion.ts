@@ -1,7 +1,7 @@
-import {mutationType} from "nexus"
+import { mutationType } from 'nexus'
 
 export default mutationType({
-    definition: (t) =>{
-        t.crud.createOnepost()
-    }
+  definition: (t) => {
+    t.crud.createOnepost()
+  },
 })
