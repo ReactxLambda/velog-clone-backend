@@ -16,12 +16,14 @@
     "@nexus/schema": "^0.20.1",
     "@prisma/client": "2.23.0",
     "apollo-server-lambda": "^2.25.2",
-    "graphql": "^15.5.1",
+    "graphql": "^15.5.2",
     "nexus": "^1.1.0",
     "nexus-plugin-prisma": "^0.35.0",
-    "prisma": "2.23.0"
+    "prisma": "2.23.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@types/uuid": "^8.3.1",
     "prettier": "^2.3.2",
     "serverless-dotenv-plugin": "^3.9.0",
     "serverless-offline": "^7.0.0",

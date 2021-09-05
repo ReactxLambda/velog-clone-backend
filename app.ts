@@ -1,4 +1,4 @@
-const { ApolloServer } = require('apollo-server-lambda')
+import { ApolloServer } from 'apollo-server-lambda'
 import { PrismaClient } from '@prisma/client'
 
 import { Context } from './graphql'
