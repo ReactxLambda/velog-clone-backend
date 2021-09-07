@@ -1,18 +1,15 @@
 import { ApolloServer } from "apollo-server-lambda"
 import { PrismaClient } from "@prisma/client"
+import { asNexusMethod, makeSchema } from "nexus"
+import { nexusSchemaPrisma } from "nexus-plugin-prisma/schema"
+import * as path from "path"
 
 import { Context } from "./graphql/context"
 
-import { asNexusMethod, makeSchema } from "nexus"
-import { nexusSchemaPrisma } from "nexus-plugin-prisma/schema"
-
-import * as path from "path"
-
 import { Schemas } from "./graphql/schema/schema"
-import { GraphQLBigInt } from "./graphql/type"
-
 import { Query } from "./graphql/query/index"
 import { Mutaion } from "./graphql/mutaion/index"
+import { GraphQLBigInt } from "./graphql/type"
 
 const schema = makeSchema({
   types: [Query, Mutaion, Schemas, asNexusMethod(GraphQLBigInt, "BigInt")],

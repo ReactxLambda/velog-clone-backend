@@ -1,5 +1,6 @@
-import { extendType, mutationType } from "nexus"
+import { extendType } from "nexus"
 import { v4 as uuidv4 } from "uuid"
+import { Context } from "@graphql/context"
 
 export const Post = extendType({
     type:"Mutation",
