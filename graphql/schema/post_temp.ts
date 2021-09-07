@@ -1,7 +1,7 @@
-import { objectType } from 'nexus'
+import { objectType } from "nexus"
 
 export const post_temp = objectType({
-  name: 'post_temp',
+  name: "post_temp",
   definition(t) {
     t.model.post()
     t.model.content()

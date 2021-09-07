@@ -1,7 +1,7 @@
-import { objectType } from 'nexus'
+import { objectType } from "nexus"
 
 export const comment = objectType({
-  name: 'comment',
+  name: "comment",
   definition(t) {
     t.model.created_at()
     t.model.comment()

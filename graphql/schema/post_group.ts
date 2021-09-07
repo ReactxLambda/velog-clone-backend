@@ -1,7 +1,7 @@
-import { objectType } from 'nexus'
+import { objectType } from "nexus"
 
 export const post_group = objectType({
-  name: 'post_group',
+  name: "post_group",
   definition(t) {
     t.model.created_at()
     t.model.id()

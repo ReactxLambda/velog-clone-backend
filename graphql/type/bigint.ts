@@ -1,12 +1,12 @@
-import { GraphQLScalarType } from 'graphql/type/definition'
+import { GraphQLScalarType } from "graphql/type/definition"
 
 const MAX_INT = Number.MAX_SAFE_INTEGER
 const MIN_INT = Number.MIN_SAFE_INTEGER
 
 const coerceBigInt = (value: any) => {
-  if (value === '')
+  if (value === "")
     throw new TypeError(
-      'BigInt cannot represent non 53-bit signed integer value: (empty string)',
+      "BigInt cannot represent non 53-bit signed integer value: (empty string)",
     )
 
   const num = Number(value)
@@ -27,14 +27,14 @@ const coerceBigInt = (value: any) => {
 }
 
 export default new GraphQLScalarType({
-  name: 'BigInt',
+  name: "BigInt",
   description:
-    'The `BigInt` scalar type represents non-fractional signed whole numeric ' +
-    'values. BigInt can represent values between -(2^53) + 1 and 2^53 - 1. ',
+    "The `BigInt` scalar type represents non-fractional signed whole numeric " +
+    "values. BigInt can represent values between -(2^53) + 1 and 2^53 - 1. ",
   serialize: coerceBigInt,
   parseValue: coerceBigInt,
   parseLiteral(ast) {
-    if (ast.kind === 'IntValue') {
+    if (ast.kind === "IntValue") {
       const num = parseInt(ast.value, 10)
       if (num <= MAX_INT && num >= MIN_INT) return num
     }

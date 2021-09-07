@@ -1,7 +1,7 @@
-import { objectType } from 'nexus'
+import { objectType } from "nexus"
 
 export const interest = objectType({
-  name: 'interest',
+  name: "interest",
   definition(t) {
     t.model.created_at()
     t.model.post()

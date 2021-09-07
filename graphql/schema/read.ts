@@ -1,7 +1,7 @@
-import { objectType } from 'nexus'
+import { objectType } from "nexus"
 
 export const read = objectType({
-  name: 'read',
+  name: "read",
   definition(t) {
     t.model.post()
     t.model.user()

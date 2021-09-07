@@ -1,7 +1,7 @@
-import { objectType } from 'nexus'
+import { objectType } from "nexus"
 
 export const user = objectType({
-  name: 'user',
+  name: "user",
   definition(t) {
     t.model.id()
     t.model.email()

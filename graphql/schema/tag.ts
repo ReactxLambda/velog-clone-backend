@@ -1,7 +1,7 @@
-import { objectType } from 'nexus'
+import { objectType } from "nexus"
 
 export const tag = objectType({
-  name: 'tag',
+  name: "tag",
   definition(t) {
     t.model.name()
     t.model.post_tag_ref()

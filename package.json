@@ -7,11 +7,6 @@
     "deploy:staging": "NODE_ENV=stage sls deploy --stage stage",
     "deploy:production": "NODE_ENV=prod sls deploy --stage prod"
   },
-  "prettier": {
-    "semi": false,
-    "singleQuote": true,
-    "trailingComma": "all"
-  },
   "dependencies": {
     "@nexus/schema": "^0.20.1",
     "@prisma/client": "2.23.0",

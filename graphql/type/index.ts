@@ -1,3 +1,3 @@
-import GraphQLBigInt from './bigint'
+import GraphQLBigInt from "./bigint"
 
 export { GraphQLBigInt }
