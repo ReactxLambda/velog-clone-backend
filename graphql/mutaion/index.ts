@@ -3,5 +3,5 @@ import { User } from "./user"
 
 export const Mutaion = {
   Post,
-  User
+  User,
 }

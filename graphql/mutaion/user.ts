@@ -14,22 +14,22 @@ export const User = extendType({
       async resolve(root, args, ctx, info, originalResolve) {
         const ci = await verifyGoogle("")
         const user = {
-            ...args,
-            velog_name: args.id
+          ...args,
+          velog_name: args.id,
         }
         return await originalResolve(root, user, ctx, info)
       },
     })
     t.field("oAuthGoogle", {
-        description: "인가 토큰을 받아 google oauth에 인증 받습니다.",
-        args :{
-            token: nonNull(stringArg())
-        },
-        type: "Json",
-        async resolve(_, args, ctx: Context) {
-            const ci = await verifyGoogle(args.token)
-            return ci
-        },
+      description: "인가 토큰을 받아 google oauth에 인증 받습니다.",
+      args: {
+        token: nonNull(stringArg()),
+      },
+      type: "Json",
+      async resolve(_, args, ctx: Context) {
+        const ci = await verifyGoogle(args.token)
+        return ci
+      },
     })
   },
 })
