@@ -1,9 +1,9 @@
 import { extendType } from "nexus"
 import { v4 as uuidv4 } from "uuid"
-import { Context } from "@graphql/context"
+import { Context } from "@graphql/common/context"
 
 export const Post = extendType({
-    type:"Mutation",
+  type: "Mutation",
   definition: (t) => {
     t.crud.createOnepost({
       description: "유저의 게시글을 만듭니다.",

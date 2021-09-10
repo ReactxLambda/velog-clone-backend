@@ -107,3 +107,4 @@ dist
 .build
 package-lock.json
 yarn.lock
+client_secret.json

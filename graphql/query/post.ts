@@ -1,5 +1,5 @@
 import { extendType } from "nexus"
-import { Context } from "@graphql/context"
+import { Context } from "@graphql/common/context"
 
 export const Post = extendType({
   type: "Query",

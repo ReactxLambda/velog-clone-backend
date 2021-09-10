@@ -1,7 +1,7 @@
 {
   "license": "GPL-3.0",
   "scripts": {
-    "format": "prettier --write \"graphql/**/*.ts\" \"app.ts\"",
+    "format": "prettier --write \"graphql/**/*.ts\" \"server.ts\"",
     "introspect": "yarn prisma introspect && yarn prisma generate",
     "offline": "NODE_ENV=dev sls offline start --stage dev",
     "deploy:staging": "NODE_ENV=stage sls deploy --stage stage",
@@ -11,6 +11,7 @@
     "@nexus/schema": "^0.20.1",
     "@prisma/client": "2.23.0",
     "apollo-server-lambda": "^2.25.2",
+    "google-auth-library": "^7.9.1",
     "graphql": "^15.5.2",
     "nexus": "^1.1.0",
     "nexus-plugin-prisma": "^0.35.0",

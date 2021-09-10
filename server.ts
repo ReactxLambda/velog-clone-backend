@@ -4,7 +4,7 @@ import { asNexusMethod, makeSchema } from "nexus"
 import { nexusSchemaPrisma } from "nexus-plugin-prisma/schema"
 import * as path from "path"
 
-import { Context } from "./graphql/context"
+import { Context } from "./graphql/common/context"
 
 import { Schemas } from "./graphql/schema/schema"
 import { Query } from "./graphql/query/index"
