@@ -36,7 +36,7 @@ export const Post = extendType({
       type : post,
       description:"정해진 기간 동안 집계된 인기순의 개시글의 가져옵니다.",
       args:{
-        title: arg({
+        interval: arg({
           type: 'String',
           default: 'weak',
           description: '트랜드 집계 기간',
@@ -46,18 +46,23 @@ export const Post = extendType({
         cursor: stringArg()
       },
       async resolve(_, args, ctx: Context) {
-
+        // args.interval
+        const now = new Date()
+        now.setDate(now.getDate() - 16)
+        console.log(now)
         return await ctx.db.post.findMany({
           skip: args.skip,
           take: args.take,
           cursor: args.cursor,
-          select:{
-            read: true,
-          },
           where: {
-            hidden: false
+            hidden: false,
+            created_at: {
+              gt:now
+            },
           },
-          
+          orderBy: {
+            score :"desc"
+          }
         })
       },
     })
