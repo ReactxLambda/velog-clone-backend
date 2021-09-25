@@ -1,5 +1,6 @@
-import { extendType } from "nexus"
+import { arg, extendType, intArg, stringArg } from "nexus"
 import { Context } from "@graphql/common/context"
+import {post} from "../schema/post"
 
 export const Post = extendType({
   type: "Query",
@@ -28,6 +29,35 @@ export const Post = extendType({
             hidden: false,
           },
           ...args,
+        })
+      },
+    })
+    t.list.field('posts_trend',{
+      type : post,
+      description:"정해진 기간 동안 집계된 인기순의 개시글의 가져옵니다.",
+      args:{
+        title: arg({
+          type: 'String',
+          default: 'weak',
+          description: '트랜드 집계 기간',
+        }),
+        skip: intArg(),
+        take: intArg(),
+        cursor: stringArg()
+      },
+      async resolve(_, args, ctx: Context) {
+
+        return await ctx.db.post.findMany({
+          skip: args.skip,
+          take: args.take,
+          cursor: args.cursor,
+          select:{
+            read: true,
+          },
+          where: {
+            hidden: false
+          },
+          
         })
       },
     })
