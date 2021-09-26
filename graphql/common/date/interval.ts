@@ -4,7 +4,7 @@ const IntervalToNumber = {
   mounth : 30,
   year : 365,
 }
-export const intervalFuncs = (interval : string) => {
+export const getInterval = (interval : string) => {
   const now = new Date()
   if(!IntervalToNumber[interval])
     throw Error("interval의 형식이 올바르지 않습니다.")

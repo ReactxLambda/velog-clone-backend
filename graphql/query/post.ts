@@ -1,7 +1,7 @@
 import { arg, extendType, intArg, stringArg } from "nexus"
 import { Context } from "@graphql/common/context"
 import {post} from "../schema/post"
-import { intervalFuncs } from "../common/date/interval"
+import { getInterval } from "../common/date/interval"
 
 export const Post = extendType({
   type: "Query",
@@ -33,6 +33,7 @@ export const Post = extendType({
         })
       },
     })
+    
     t.list.field('posts_trend',{
       type : post,
       description:"정해진 기간 동안 집계된 인기순의 개시글의 가져옵니다.",
@@ -54,7 +55,7 @@ export const Post = extendType({
           where: {
             hidden: false,
             created_at: {
-              gt:intervalFuncs[args.interval]
+              gt:getInterval(args.interval)
             },
           },
           orderBy: {
