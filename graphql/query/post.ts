@@ -1,6 +1,7 @@
 import { arg, extendType, intArg, stringArg } from "nexus"
 import { Context } from "@graphql/common/context"
 import {post} from "../schema/post"
+import { intervalFuncs } from "../common/date/interval"
 
 export const Post = extendType({
   type: "Query",
@@ -39,17 +40,13 @@ export const Post = extendType({
         interval: arg({
           type: 'String',
           default: 'weak',
-          description: '트랜드 집계 기간',
+          description: '트랜드 집계 기간 : "day" | "weak" | "mounth" | "year"',
         }),
         skip: intArg(),
         take: intArg(),
         cursor: stringArg()
       },
       async resolve(_, args, ctx: Context) {
-        // args.interval
-        const now = new Date()
-        now.setDate(now.getDate() - 16)
-        console.log(now)
         return await ctx.db.post.findMany({
           skip: args.skip,
           take: args.take,
@@ -57,7 +54,7 @@ export const Post = extendType({
           where: {
             hidden: false,
             created_at: {
-              gt:now
+              gt:intervalFuncs[args.interval]
             },
           },
           orderBy: {
