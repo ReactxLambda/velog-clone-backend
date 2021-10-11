@@ -10,6 +10,7 @@ import { Schemas } from "./graphql/schema/schema"
 import { Query } from "./graphql/query/index"
 import { Mutaion } from "./graphql/mutaion/index"
 import { GraphQLBigInt } from "./graphql/type"
+import { AuthJWT } from "./graphql/common/oauth/jwt"
 
 const schema = makeSchema({
   types: [Query, Mutaion, Schemas, asNexusMethod(GraphQLBigInt, "BigInt")],
@@ -38,11 +39,17 @@ const schema = makeSchema({
   },
 })
 
+const db = new PrismaClient()
 const server = new ApolloServer({
   schema: schema,
-  context: async ({ req }): Promise<Context> => ({
-    db: new PrismaClient(),
-  }),
+  context: async ({ event }): Promise<Context> => {
+    console.log(event.headers.Authorization)
+    return ({
+      db: db,
+      jwt: AuthJWT.getInstance(db, event.headers.Authorization)
+    })
+  }
+  ,
   playground:
     process.env.NODE_ENV === "prod"
       ? false

@@ -56,11 +56,14 @@ export const User = extendType({
             email : ci.email
           }
         })
-        if(user)
+        if(user){
+          const token = ctx.jwt.getToken({type : "access", id : user.id})
           return {
             ...user,
-            is_member: true
+            is_member: true,
+            token,
           }
+        }
         return {
           is_member: false,
           email : ci.email,

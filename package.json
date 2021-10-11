@@ -13,12 +13,14 @@
     "apollo-server-lambda": "^2.25.2",
     "google-auth-library": "^7.9.1",
     "graphql": "^15.5.2",
+    "jsonwebtoken": "^8.5.1",
     "nexus": "^1.1.0",
     "nexus-plugin-prisma": "^0.35.0",
     "prisma": "2.23.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^8.5.5",
     "@types/uuid": "^8.3.1",
     "prettier": "^2.3.2",
     "serverless-dotenv-plugin": "^3.9.0",
