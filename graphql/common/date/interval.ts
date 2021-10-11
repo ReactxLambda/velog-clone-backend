@@ -1,7 +1,7 @@
 const IntervalToNumber = {
   day : 1,
-  weak : 7,
-  mounth : 30,
+  week : 7,
+  month : 30,
   year : 365,
 }
 export const getInterval = (interval : string) => {

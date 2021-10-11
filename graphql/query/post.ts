@@ -40,8 +40,8 @@ export const Post = extendType({
       args:{
         interval: arg({
           type: 'String',
-          default: 'weak',
-          description: '트랜드 집계 기간 : "day" | "weak" | "mounth" | "year"',
+          default: 'week',
+          description: '트랜드 집계 기간 : "day" | "week" | "month" | "year"',
         }),
         skip: intArg(),
         take: intArg(),
