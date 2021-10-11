@@ -8,11 +8,28 @@ export const Post = extendType({
     t.crud.createOnepost({
       description: "유저의 게시글을 만듭니다.",
       computedInputs: {
-        id: () => uuidv4(),
+        id: () => "",
+        user: () => ""
       },
-      async resolve(root, args, ctx, info, originalResolve) {
-        //추가 작업
-        return await originalResolve(root, args, ctx, info)
+      async resolve(_, args, ctx: Context, __, ___) {
+        const payload = await ctx.jwt.validate()
+        const post = await ctx.db.post.create({
+          data : {
+            id : uuidv4(),
+            content : args.data.content,
+            pre_content : args.data.pre_content,
+            title : args.data.title,
+            url : args.data.url,
+            created_at : new Date(),
+            hidden : args.data.hidden,
+            comment_count : 0,
+            like_count : 0,
+            score: 0,
+            user_id : payload.id
+          }
+        })
+        console.log(post)
+        return post
       },
     })
   },
