@@ -37,7 +37,6 @@ export class AuthJWT {
   }
 
   getToken = (payload: JWTPayload) => {
-    console.log( AuthJWT)
     return AuthJWT.jwt.sign({ ...payload }, this.getSecretKey)
   }
 

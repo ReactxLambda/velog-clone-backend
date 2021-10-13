@@ -1,4 +1,3 @@
-import { user } from "@graphql/schema/user"
 import { extendType, nonNull, stringArg } from "nexus"
 import { verifyGoogle } from "../common/oauth/google.oauth"
 import { Context } from "@graphql/common/context"
@@ -10,11 +9,24 @@ export const User = extendType({
     t.crud.createOneuser({
       description: "신규 유저를 가입 시킵니다.",
       computedInputs: {
-        velog_name: (res) => res.args.data.id,
+        velog_name: () => "",
       },
-      async resolve(root, args, ctx, info, originalResolve) {
-        console.log(args)
-        return await originalResolve(root, args, ctx, info)
+      async resolve(root, args, ctx: Context, info, originalResolve) {
+        const user = await ctx.db.user.create({
+          data:{
+            id : args.data.id,
+            email : args.data.email,
+            velog_name : args.data.id,
+            image: args.data.image,
+            social: args.data.social,
+            introduction: args.data.introduction,
+          }
+        })
+        const token = ctx.jwt.getToken({type : "access", id : user.id})
+        return {
+          ...user,
+          token,
+        }
       },
     })
 
@@ -25,7 +37,6 @@ export const User = extendType({
         id: nonNull(stringArg()),
       },
       async resolve(_, args, ctx: Context) {
-        console.log(args)
         const user = await ctx.db.user.findUnique({
           where: {
             id: args.id

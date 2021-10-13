@@ -9,5 +9,6 @@ export const user = objectType({
     t.model.introduction()
     t.model.image()
     t.model.social()
+    t.string('token')
   },
 })

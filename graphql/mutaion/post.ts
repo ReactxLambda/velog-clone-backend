@@ -28,7 +28,7 @@ export const Post = extendType({
             user_id : payload.id
           }
         })
-        console.log(post)
+
         return post
       },
     })
