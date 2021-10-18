@@ -21,7 +21,7 @@ const schema = makeSchema({
       prismaClient: (ctx: Context) => ctx.db,
       outputs: {
         typegen: path.join(
-          `${process.env.NODE_ENV === "dev" ? __dirname : ""}` +
+          `${process.env.NODE_ENV === "development" ? __dirname : ""}` +
             "/tmp/generated/typegen-nexus-plugin-prisma.d.ts",
         ),
       },
@@ -29,11 +29,11 @@ const schema = makeSchema({
   ],
   outputs: {
     schema: path.join(
-      `${process.env.NODE_ENV === "dev" ? __dirname : ""}` +
+      `${process.env.NODE_ENV === "development" ? __dirname : ""}` +
         "/tmp/generated/schema.graphql",
     ),
     typegen: path.join(
-      `${process.env.NODE_ENV === "dev" ? __dirname : ""}` +
+      `${process.env.NODE_ENV === "development" ? __dirname : ""}` +
         "/tmp/generated/nexus.ts",
     ),
   },
@@ -53,10 +53,10 @@ const server = new ApolloServer({
     process.env.NODE_ENV === "prod"
       ? false
       : {
-          endpoint: `/${process.env.NODE_ENV}/graphql`,
+          endpoint: `/${process.env.NODE_ENV === "development" ? "development" : process.env.NODE_ENV}/graphql`,
         },
 })
-
+console.log(process.env.NODE_ENV)
 exports.graphqlHandler = server.createHandler({
   cors: {
     origin: "*",

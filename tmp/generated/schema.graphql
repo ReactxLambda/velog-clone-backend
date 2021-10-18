@@ -12,33 +12,94 @@ scalar DateTime
 scalar Json
 
 type Mutation {
+  """
+  개시글에 태그를 추가합니다.
+   없는 태그를 입력시 생성후 게시글에 추가 합니다.
+  """
+  createManypost_tag_ref(post_id: String!, tags: [String]!): [post_tag_ref]
+
+  """유저의 게시글을 만듭니다."""
   createOnepost(data: postCreateInput!): post!
+
+  """하나의 새로운 태그를 만듭니다."""
+  createOnetag(data: tagCreateInput!): tag!
+
+  """신규 유저를 가입 시킵니다."""
+  createOneuser(data: userCreateInput!): user!
+
+  """인가 토큰을 받아 google oauth에 인증 받습니다."""
+  oAuthGoogle(token: String!): Json
+
+  """회원 가입시 id의 유효성을 검사합니다."""
+  validate_id(id: String!): Json
+}
+
+input NestedStringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringFilter
+  notIn: [String!]
+  startsWith: String
 }
 
 type Query {
-  comment(where: commentWhereUniqueInput!): comment
-  comments(cursor: commentWhereUniqueInput, skip: Int, take: Int): [comment!]!
-  interest(where: interestWhereUniqueInput!): interest
-  interests(cursor: interestWhereUniqueInput, skip: Int, take: Int): [interest!]!
+  """개시글을 가져옵니다."""
   post(where: postWhereUniqueInput!): post
-  postGroup(where: post_groupWhereUniqueInput!): post_group
-  postGroups(cursor: post_groupWhereUniqueInput, skip: Int, take: Int): [post_group!]!
-  postTagRef(where: post_tag_refWhereUniqueInput!): post_tag_ref
-  postTagRefs(cursor: post_tag_refWhereUniqueInput, skip: Int, take: Int): [post_tag_ref!]!
-  postTemp(where: post_tempWhereUniqueInput!): post_temp
-  postTemps(cursor: post_tempWhereUniqueInput, skip: Int, take: Int): [post_temp!]!
-  posts(cursor: postWhereUniqueInput, skip: Int, take: Int): [post!]!
-  read(where: readWhereUniqueInput!): read
-  reads(cursor: readWhereUniqueInput, skip: Int, take: Int): [read!]!
-  tag(where: tagWhereUniqueInput!): tag
-  tags(cursor: tagWhereUniqueInput, skip: Int, take: Int): [tag!]!
+
+  """모든 개시글을 가져옵니다."""
+  posts(cursor: postWhereUniqueInput, orderBy: [QueryPostsOrderByInput!], skip: Int, take: Int, where: QueryPostsWhereInput): [post!]!
+
+  """정해진 기간 동안 집계된 인기순의 개시글의 가져옵니다."""
+  posts_trend(
+    cursor: String
+
+    """
+    트랜드 집계 기간 : "day" | "week" | "month" | "year"
+    """
+    interval: String = "week"
+    skip: Int
+    take: Int
+  ): [post]
   user(where: userWhereUniqueInput!): user
   users(cursor: userWhereUniqueInput, skip: Int, take: Int): [user!]!
 }
 
+input QueryPostsOrderByInput {
+  created_at: SortOrder
+}
+
+input QueryPostsWhereInput {
+  user_id: StringFilter
+}
+
+enum SortOrder {
+  asc
+  desc
+}
+
+input StringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringFilter
+  notIn: [String!]
+  startsWith: String
+}
+
 type comment {
   comment: comment!
-  created_at: DateTime!
+  created_at: DateTime
   id: String!
   other_comment(cursor: commentWhereUniqueInput, skip: Int, take: Int): [comment!]!
   post: post!
@@ -174,7 +235,7 @@ input commentWhereUniqueInput {
 }
 
 type interest {
-  created_at: DateTime
+  created_at: DateTime!
   post: post!
   user: user!
 }
@@ -244,15 +305,19 @@ input interestWhereUniqueInput {
 
 type post {
   comment(cursor: commentWhereUniqueInput, skip: Int, take: Int): [comment!]!
+  comment_count: Int!
   content: String!
   created_at: DateTime!
   hidden: Boolean!
   id: String!
   interest(cursor: interestWhereUniqueInput, skip: Int, take: Int): [interest!]!
+  like_count: Int!
   post_tag_ref(cursor: post_tag_refWhereUniqueInput, skip: Int, take: Int): [post_tag_ref!]!
   post_temp: post_temp
   pre_content: String!
   read(cursor: readWhereUniqueInput, skip: Int, take: Int): [read!]!
+  read_count: Int!
+  score: Int!
   thumbnail: String
   title: String!
   url: String!
@@ -262,27 +327,33 @@ type post {
 
 input postCreateInput {
   comment: commentCreateNestedManyWithoutPostInput
+  comment_count: Int
   content: String!
-  created_at: DateTime!
+  created_at: DateTime
   hidden: Boolean
-  id: String!
   interest: interestCreateNestedManyWithoutPostInput
+  like_count: Int
   post_tag_ref: post_tag_refCreateNestedManyWithoutPostInput
   post_temp: post_tempCreateNestedOneWithoutPostInput
   pre_content: String!
   read: readCreateNestedManyWithoutPostInput
+  read_count: Int
+  score: Int
   thumbnail: String
   title: String!
   url: String!
-  user: userCreateNestedOneWithoutPostInput!
 }
 
 input postCreateManyUserInput {
+  comment_count: Int
   content: String!
-  created_at: DateTime!
+  created_at: DateTime
   hidden: Boolean
   id: String!
+  like_count: Int
   pre_content: String!
+  read_count: Int
+  score: Int
   thumbnail: String
   title: String!
   url: String!
@@ -339,15 +410,19 @@ input postCreateOrConnectWithoutUserInput {
 }
 
 input postCreateWithoutCommentInput {
+  comment_count: Int
   content: String!
-  created_at: DateTime!
+  created_at: DateTime
   hidden: Boolean
   id: String!
   interest: interestCreateNestedManyWithoutPostInput
+  like_count: Int
   post_tag_ref: post_tag_refCreateNestedManyWithoutPostInput
   post_temp: post_tempCreateNestedOneWithoutPostInput
   pre_content: String!
   read: readCreateNestedManyWithoutPostInput
+  read_count: Int
+  score: Int
   thumbnail: String
   title: String!
   url: String!
@@ -356,14 +431,18 @@ input postCreateWithoutCommentInput {
 
 input postCreateWithoutInterestInput {
   comment: commentCreateNestedManyWithoutPostInput
+  comment_count: Int
   content: String!
-  created_at: DateTime!
+  created_at: DateTime
   hidden: Boolean
   id: String!
+  like_count: Int
   post_tag_ref: post_tag_refCreateNestedManyWithoutPostInput
   post_temp: post_tempCreateNestedOneWithoutPostInput
   pre_content: String!
   read: readCreateNestedManyWithoutPostInput
+  read_count: Int
+  score: Int
   thumbnail: String
   title: String!
   url: String!
@@ -372,14 +451,18 @@ input postCreateWithoutInterestInput {
 
 input postCreateWithoutReadInput {
   comment: commentCreateNestedManyWithoutPostInput
+  comment_count: Int
   content: String!
-  created_at: DateTime!
+  created_at: DateTime
   hidden: Boolean
   id: String!
   interest: interestCreateNestedManyWithoutPostInput
+  like_count: Int
   post_tag_ref: post_tag_refCreateNestedManyWithoutPostInput
   post_temp: post_tempCreateNestedOneWithoutPostInput
   pre_content: String!
+  read_count: Int
+  score: Int
   thumbnail: String
   title: String!
   url: String!
@@ -388,15 +471,19 @@ input postCreateWithoutReadInput {
 
 input postCreateWithoutUserInput {
   comment: commentCreateNestedManyWithoutPostInput
+  comment_count: Int
   content: String!
-  created_at: DateTime!
+  created_at: DateTime
   hidden: Boolean
   id: String!
   interest: interestCreateNestedManyWithoutPostInput
+  like_count: Int
   post_tag_ref: post_tag_refCreateNestedManyWithoutPostInput
   post_temp: post_tempCreateNestedOneWithoutPostInput
   pre_content: String!
   read: readCreateNestedManyWithoutPostInput
+  read_count: Int
+  score: Int
   thumbnail: String
   title: String!
   url: String!
@@ -415,7 +502,7 @@ type post_group {
 }
 
 input post_groupCreateManyUserInput {
-  created_at: DateTime!
+  created_at: DateTime
   id: String!
   name: String!
   priority: Json
@@ -439,7 +526,7 @@ input post_groupCreateOrConnectWithoutUserInput {
 }
 
 input post_groupCreateWithoutUserInput {
-  created_at: DateTime!
+  created_at: DateTime
   id: String!
   name: String!
   priority: Json
@@ -455,6 +542,7 @@ type post_tag_ref {
 }
 
 input post_tag_refCreateManyPostInput {
+  created_at: DateTime
   tag_name: String!
 }
 
@@ -476,6 +564,7 @@ input post_tag_refCreateOrConnectWithoutPostInput {
 }
 
 input post_tag_refCreateWithoutPostInput {
+  created_at: DateTime
   tag: tagCreateNestedOneWithoutPost_tag_refInput!
 }
 
@@ -516,7 +605,7 @@ input post_tempWhereUniqueInput {
 }
 
 type read {
-  created_at: DateTime
+  created_at: DateTime!
   post: post!
   user: user!
 }
@@ -585,9 +674,13 @@ input readWhereUniqueInput {
 }
 
 type tag {
-  created_at: DateTime
+  created_at: DateTime!
   name: String!
   post_tag_ref(cursor: post_tag_refWhereUniqueInput, skip: Int, take: Int): [post_tag_ref!]!
+}
+
+input tagCreateInput {
+  name: String!
 }
 
 input tagCreateNestedOneWithoutPost_tag_refInput {
@@ -616,7 +709,22 @@ type user {
   image: String
   introduction: String
   social: Json
+  token: String
   velog_name: String!
+}
+
+input userCreateInput {
+  comment: commentCreateNestedManyWithoutUserInput
+  email: String!
+  id: String!
+  image: String
+  interest: interestCreateNestedManyWithoutUserInput
+  introduction: String
+  password: String
+  post: postCreateNestedManyWithoutUserInput
+  post_group: post_groupCreateNestedManyWithoutUserInput
+  read: readCreateNestedManyWithoutUserInput
+  social: Json
 }
 
 input userCreateNestedOneWithoutCommentInput {
@@ -720,5 +828,6 @@ input userCreateWithoutReadInput {
 }
 
 input userWhereUniqueInput {
+  email: String
   id: String
 }

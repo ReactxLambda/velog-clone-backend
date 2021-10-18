@@ -36,12 +36,12 @@ interface NexusPrismaInputs {
       ordering: 'user_id' | 'post_id' | 'created_at'
     }
     posts: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'content' | 'created_at' | 'pre_content' | 'thumbnail' | 'url' | 'hidden' | 'user_id' | 'user' | 'comment' | 'interest' | 'post_tag_ref' | 'post_temp' | 'read'
-      ordering: 'id' | 'title' | 'content' | 'created_at' | 'pre_content' | 'thumbnail' | 'url' | 'hidden' | 'user_id'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'content' | 'created_at' | 'pre_content' | 'thumbnail' | 'url' | 'hidden' | 'user_id' | 'like_count' | 'read_count' | 'comment_count' | 'score' | 'user' | 'comment' | 'interest' | 'post_tag_ref' | 'post_temp' | 'read'
+      ordering: 'id' | 'title' | 'content' | 'created_at' | 'pre_content' | 'thumbnail' | 'url' | 'hidden' | 'user_id' | 'like_count' | 'read_count' | 'comment_count' | 'score'
     }
     postTagRefs: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'tag_name' | 'post_id' | 'post' | 'tag'
-      ordering: 'tag_name' | 'post_id'
+      filtering: 'AND' | 'OR' | 'NOT' | 'tag_name' | 'post_id' | 'created_at' | 'post' | 'tag'
+      ordering: 'tag_name' | 'post_id' | 'created_at'
     }
     postTemps: {
       filtering: 'AND' | 'OR' | 'NOT' | 'post_id' | 'content' | 'title' | 'post'
@@ -83,8 +83,8 @@ interface NexusPrismaInputs {
       ordering: 'user_id' | 'post_id' | 'created_at'
     }
     post_tag_ref: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'tag_name' | 'post_id' | 'post' | 'tag'
-      ordering: 'tag_name' | 'post_id'
+      filtering: 'AND' | 'OR' | 'NOT' | 'tag_name' | 'post_id' | 'created_at' | 'post' | 'tag'
+      ordering: 'tag_name' | 'post_id' | 'created_at'
     }
     read: {
       filtering: 'AND' | 'OR' | 'NOT' | 'user_id' | 'post_id' | 'created_at' | 'post' | 'user'
@@ -102,8 +102,8 @@ interface NexusPrismaInputs {
   }
   tag: {
     post_tag_ref: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'tag_name' | 'post_id' | 'post' | 'tag'
-      ordering: 'tag_name' | 'post_id'
+      filtering: 'AND' | 'OR' | 'NOT' | 'tag_name' | 'post_id' | 'created_at' | 'post' | 'tag'
+      ordering: 'tag_name' | 'post_id' | 'created_at'
     }
   }
   user: {
@@ -116,8 +116,8 @@ interface NexusPrismaInputs {
       ordering: 'user_id' | 'post_id' | 'created_at'
     }
     post: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'content' | 'created_at' | 'pre_content' | 'thumbnail' | 'url' | 'hidden' | 'user_id' | 'user' | 'comment' | 'interest' | 'post_tag_ref' | 'post_temp' | 'read'
-      ordering: 'id' | 'title' | 'content' | 'created_at' | 'pre_content' | 'thumbnail' | 'url' | 'hidden' | 'user_id'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'title' | 'content' | 'created_at' | 'pre_content' | 'thumbnail' | 'url' | 'hidden' | 'user_id' | 'like_count' | 'read_count' | 'comment_count' | 'score' | 'user' | 'comment' | 'interest' | 'post_tag_ref' | 'post_temp' | 'read'
+      ordering: 'id' | 'title' | 'content' | 'created_at' | 'pre_content' | 'thumbnail' | 'url' | 'hidden' | 'user_id' | 'like_count' | 'read_count' | 'comment_count' | 'score'
     }
     post_group: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'user_id' | 'priority' | 'created_at' | 'user'
@@ -240,6 +240,10 @@ interface NexusPrismaOutputs {
     url: 'String'
     hidden: 'Boolean'
     user_id: 'String'
+    like_count: 'Int'
+    read_count: 'Int'
+    comment_count: 'Int'
+    score: 'Int'
     user: 'user'
     comment: 'comment'
     interest: 'interest'
@@ -250,6 +254,7 @@ interface NexusPrismaOutputs {
   post_tag_ref: {
     tag_name: 'String'
     post_id: 'String'
+    created_at: 'DateTime'
     post: 'post'
     tag: 'tag'
   }

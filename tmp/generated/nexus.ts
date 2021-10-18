@@ -33,6 +33,38 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  NestedStringFilter: { // input type
+    contains?: string | null; // String
+    endsWith?: string | null; // String
+    equals?: string | null; // String
+    gt?: string | null; // String
+    gte?: string | null; // String
+    in?: string[] | null; // [String!]
+    lt?: string | null; // String
+    lte?: string | null; // String
+    not?: NexusGenInputs['NestedStringFilter'] | null; // NestedStringFilter
+    notIn?: string[] | null; // [String!]
+    startsWith?: string | null; // String
+  }
+  QueryPostsOrderByInput: { // input type
+    created_at?: NexusGenEnums['SortOrder'] | null; // SortOrder
+  }
+  QueryPostsWhereInput: { // input type
+    user_id?: NexusGenInputs['StringFilter'] | null; // StringFilter
+  }
+  StringFilter: { // input type
+    contains?: string | null; // String
+    endsWith?: string | null; // String
+    equals?: string | null; // String
+    gt?: string | null; // String
+    gte?: string | null; // String
+    in?: string[] | null; // [String!]
+    lt?: string | null; // String
+    lte?: string | null; // String
+    not?: NexusGenInputs['NestedStringFilter'] | null; // NestedStringFilter
+    notIn?: string[] | null; // [String!]
+    startsWith?: string | null; // String
+  }
   commentCreateManyCommentInput: { // input type
     created_at?: NexusGenScalars['DateTime'] | null; // DateTime
     id: string; // String!
@@ -193,26 +225,32 @@ export interface NexusGenInputs {
   }
   postCreateInput: { // input type
     comment?: NexusGenInputs['commentCreateNestedManyWithoutPostInput'] | null; // commentCreateNestedManyWithoutPostInput
+    comment_count?: number | null; // Int
     content: string; // String!
-    created_at: NexusGenScalars['DateTime']; // DateTime!
+    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
     hidden?: boolean | null; // Boolean
-    id: string; // String!
     interest?: NexusGenInputs['interestCreateNestedManyWithoutPostInput'] | null; // interestCreateNestedManyWithoutPostInput
+    like_count?: number | null; // Int
     post_tag_ref?: NexusGenInputs['post_tag_refCreateNestedManyWithoutPostInput'] | null; // post_tag_refCreateNestedManyWithoutPostInput
     post_temp?: NexusGenInputs['post_tempCreateNestedOneWithoutPostInput'] | null; // post_tempCreateNestedOneWithoutPostInput
     pre_content: string; // String!
     read?: NexusGenInputs['readCreateNestedManyWithoutPostInput'] | null; // readCreateNestedManyWithoutPostInput
+    read_count?: number | null; // Int
+    score?: number | null; // Int
     thumbnail?: string | null; // String
     title: string; // String!
     url: string; // String!
-    user: NexusGenInputs['userCreateNestedOneWithoutPostInput']; // userCreateNestedOneWithoutPostInput!
   }
   postCreateManyUserInput: { // input type
+    comment_count?: number | null; // Int
     content: string; // String!
-    created_at: NexusGenScalars['DateTime']; // DateTime!
+    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
     hidden?: boolean | null; // Boolean
     id: string; // String!
+    like_count?: number | null; // Int
     pre_content: string; // String!
+    read_count?: number | null; // Int
+    score?: number | null; // Int
     thumbnail?: string | null; // String
     title: string; // String!
     url: string; // String!
@@ -259,15 +297,19 @@ export interface NexusGenInputs {
     where: NexusGenInputs['postWhereUniqueInput']; // postWhereUniqueInput!
   }
   postCreateWithoutCommentInput: { // input type
+    comment_count?: number | null; // Int
     content: string; // String!
-    created_at: NexusGenScalars['DateTime']; // DateTime!
+    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
     hidden?: boolean | null; // Boolean
     id: string; // String!
     interest?: NexusGenInputs['interestCreateNestedManyWithoutPostInput'] | null; // interestCreateNestedManyWithoutPostInput
+    like_count?: number | null; // Int
     post_tag_ref?: NexusGenInputs['post_tag_refCreateNestedManyWithoutPostInput'] | null; // post_tag_refCreateNestedManyWithoutPostInput
     post_temp?: NexusGenInputs['post_tempCreateNestedOneWithoutPostInput'] | null; // post_tempCreateNestedOneWithoutPostInput
     pre_content: string; // String!
     read?: NexusGenInputs['readCreateNestedManyWithoutPostInput'] | null; // readCreateNestedManyWithoutPostInput
+    read_count?: number | null; // Int
+    score?: number | null; // Int
     thumbnail?: string | null; // String
     title: string; // String!
     url: string; // String!
@@ -275,14 +317,18 @@ export interface NexusGenInputs {
   }
   postCreateWithoutInterestInput: { // input type
     comment?: NexusGenInputs['commentCreateNestedManyWithoutPostInput'] | null; // commentCreateNestedManyWithoutPostInput
+    comment_count?: number | null; // Int
     content: string; // String!
-    created_at: NexusGenScalars['DateTime']; // DateTime!
+    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
     hidden?: boolean | null; // Boolean
     id: string; // String!
+    like_count?: number | null; // Int
     post_tag_ref?: NexusGenInputs['post_tag_refCreateNestedManyWithoutPostInput'] | null; // post_tag_refCreateNestedManyWithoutPostInput
     post_temp?: NexusGenInputs['post_tempCreateNestedOneWithoutPostInput'] | null; // post_tempCreateNestedOneWithoutPostInput
     pre_content: string; // String!
     read?: NexusGenInputs['readCreateNestedManyWithoutPostInput'] | null; // readCreateNestedManyWithoutPostInput
+    read_count?: number | null; // Int
+    score?: number | null; // Int
     thumbnail?: string | null; // String
     title: string; // String!
     url: string; // String!
@@ -290,14 +336,18 @@ export interface NexusGenInputs {
   }
   postCreateWithoutReadInput: { // input type
     comment?: NexusGenInputs['commentCreateNestedManyWithoutPostInput'] | null; // commentCreateNestedManyWithoutPostInput
+    comment_count?: number | null; // Int
     content: string; // String!
-    created_at: NexusGenScalars['DateTime']; // DateTime!
+    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
     hidden?: boolean | null; // Boolean
     id: string; // String!
     interest?: NexusGenInputs['interestCreateNestedManyWithoutPostInput'] | null; // interestCreateNestedManyWithoutPostInput
+    like_count?: number | null; // Int
     post_tag_ref?: NexusGenInputs['post_tag_refCreateNestedManyWithoutPostInput'] | null; // post_tag_refCreateNestedManyWithoutPostInput
     post_temp?: NexusGenInputs['post_tempCreateNestedOneWithoutPostInput'] | null; // post_tempCreateNestedOneWithoutPostInput
     pre_content: string; // String!
+    read_count?: number | null; // Int
+    score?: number | null; // Int
     thumbnail?: string | null; // String
     title: string; // String!
     url: string; // String!
@@ -305,15 +355,19 @@ export interface NexusGenInputs {
   }
   postCreateWithoutUserInput: { // input type
     comment?: NexusGenInputs['commentCreateNestedManyWithoutPostInput'] | null; // commentCreateNestedManyWithoutPostInput
+    comment_count?: number | null; // Int
     content: string; // String!
-    created_at: NexusGenScalars['DateTime']; // DateTime!
+    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
     hidden?: boolean | null; // Boolean
     id: string; // String!
     interest?: NexusGenInputs['interestCreateNestedManyWithoutPostInput'] | null; // interestCreateNestedManyWithoutPostInput
+    like_count?: number | null; // Int
     post_tag_ref?: NexusGenInputs['post_tag_refCreateNestedManyWithoutPostInput'] | null; // post_tag_refCreateNestedManyWithoutPostInput
     post_temp?: NexusGenInputs['post_tempCreateNestedOneWithoutPostInput'] | null; // post_tempCreateNestedOneWithoutPostInput
     pre_content: string; // String!
     read?: NexusGenInputs['readCreateNestedManyWithoutPostInput'] | null; // readCreateNestedManyWithoutPostInput
+    read_count?: number | null; // Int
+    score?: number | null; // Int
     thumbnail?: string | null; // String
     title: string; // String!
     url: string; // String!
@@ -322,7 +376,7 @@ export interface NexusGenInputs {
     id?: string | null; // String
   }
   post_groupCreateManyUserInput: { // input type
-    created_at: NexusGenScalars['DateTime']; // DateTime!
+    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
     id: string; // String!
     name: string; // String!
     priority?: NexusGenScalars['Json'] | null; // Json
@@ -342,7 +396,7 @@ export interface NexusGenInputs {
     where: NexusGenInputs['post_groupWhereUniqueInput']; // post_groupWhereUniqueInput!
   }
   post_groupCreateWithoutUserInput: { // input type
-    created_at: NexusGenScalars['DateTime']; // DateTime!
+    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
     id: string; // String!
     name: string; // String!
     priority?: NexusGenScalars['Json'] | null; // Json
@@ -351,6 +405,7 @@ export interface NexusGenInputs {
     id?: string | null; // String
   }
   post_tag_refCreateManyPostInput: { // input type
+    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
     tag_name: string; // String!
   }
   post_tag_refCreateManyPostInputEnvelope: { // input type
@@ -368,6 +423,7 @@ export interface NexusGenInputs {
     where: NexusGenInputs['post_tag_refWhereUniqueInput']; // post_tag_refWhereUniqueInput!
   }
   post_tag_refCreateWithoutPostInput: { // input type
+    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
     tag: NexusGenInputs['tagCreateNestedOneWithoutPost_tag_refInput']; // tagCreateNestedOneWithoutPost_tag_refInput!
   }
   post_tag_refTag_namePost_idCompoundUniqueInput: { // input type
@@ -444,6 +500,9 @@ export interface NexusGenInputs {
   readWhereUniqueInput: { // input type
     user_id_post_id?: NexusGenInputs['readUser_idPost_idCompoundUniqueInput'] | null; // readUser_idPost_idCompoundUniqueInput
   }
+  tagCreateInput: { // input type
+    name: string; // String!
+  }
   tagCreateNestedOneWithoutPost_tag_refInput: { // input type
     connect?: NexusGenInputs['tagWhereUniqueInput'] | null; // tagWhereUniqueInput
     connectOrCreate?: NexusGenInputs['tagCreateOrConnectWithoutPost_tag_refInput'] | null; // tagCreateOrConnectWithoutPost_tag_refInput
@@ -459,6 +518,19 @@ export interface NexusGenInputs {
   }
   tagWhereUniqueInput: { // input type
     name?: string | null; // String
+  }
+  userCreateInput: { // input type
+    comment?: NexusGenInputs['commentCreateNestedManyWithoutUserInput'] | null; // commentCreateNestedManyWithoutUserInput
+    email: string; // String!
+    id: string; // String!
+    image?: string | null; // String
+    interest?: NexusGenInputs['interestCreateNestedManyWithoutUserInput'] | null; // interestCreateNestedManyWithoutUserInput
+    introduction?: string | null; // String
+    password?: string | null; // String
+    post?: NexusGenInputs['postCreateNestedManyWithoutUserInput'] | null; // postCreateNestedManyWithoutUserInput
+    post_group?: NexusGenInputs['post_groupCreateNestedManyWithoutUserInput'] | null; // post_groupCreateNestedManyWithoutUserInput
+    read?: NexusGenInputs['readCreateNestedManyWithoutUserInput'] | null; // readCreateNestedManyWithoutUserInput
+    social?: NexusGenScalars['Json'] | null; // Json
   }
   userCreateNestedOneWithoutCommentInput: { // input type
     connect?: NexusGenInputs['userWhereUniqueInput'] | null; // userWhereUniqueInput
@@ -549,11 +621,13 @@ export interface NexusGenInputs {
     velog_name: string; // String!
   }
   userWhereUniqueInput: { // input type
+    email?: string | null; // String
     id?: string | null; // String
   }
 }
 
 export interface NexusGenEnums {
+  SortOrder: "asc" | "desc"
 }
 
 export interface NexusGenScalars {
@@ -571,20 +645,24 @@ export interface NexusGenObjects {
   Mutation: {};
   Query: {};
   comment: { // root type
-    created_at: NexusGenScalars['DateTime']; // DateTime!
+    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
     id: string; // String!
     reply_to: string; // String!
     text: string; // String!
   }
   interest: { // root type
-    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
+    created_at: NexusGenScalars['DateTime']; // DateTime!
   }
   post: { // root type
+    comment_count: number; // Int!
     content: string; // String!
     created_at: NexusGenScalars['DateTime']; // DateTime!
     hidden: boolean; // Boolean!
     id: string; // String!
+    like_count: number; // Int!
     pre_content: string; // String!
+    read_count: number; // Int!
+    score: number; // Int!
     thumbnail?: string | null; // String
     title: string; // String!
     url: string; // String!
@@ -603,10 +681,10 @@ export interface NexusGenObjects {
     title?: string | null; // String
   }
   read: { // root type
-    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
+    created_at: NexusGenScalars['DateTime']; // DateTime!
   }
   tag: { // root type
-    created_at?: NexusGenScalars['DateTime'] | null; // DateTime
+    created_at: NexusGenScalars['DateTime']; // DateTime!
     name: string; // String!
   }
   user: { // root type
@@ -615,6 +693,7 @@ export interface NexusGenObjects {
     image?: string | null; // String
     introduction?: string | null; // String
     social?: NexusGenScalars['Json'] | null; // Json
+    token?: string | null; // String
     velog_name: string; // String!
   }
 }
@@ -627,35 +706,27 @@ export interface NexusGenUnions {
 
 export type NexusGenRootTypes = NexusGenObjects
 
-export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
+export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnums
 
 export interface NexusGenFieldTypes {
   Mutation: { // field return type
+    createManypost_tag_ref: Array<NexusGenRootTypes['post_tag_ref'] | null> | null; // [post_tag_ref]
     createOnepost: NexusGenRootTypes['post']; // post!
+    createOnetag: NexusGenRootTypes['tag']; // tag!
+    createOneuser: NexusGenRootTypes['user']; // user!
+    oAuthGoogle: NexusGenScalars['Json'] | null; // Json
+    validate_id: NexusGenScalars['Json'] | null; // Json
   }
   Query: { // field return type
-    comment: NexusGenRootTypes['comment'] | null; // comment
-    comments: NexusGenRootTypes['comment'][]; // [comment!]!
-    interest: NexusGenRootTypes['interest'] | null; // interest
-    interests: NexusGenRootTypes['interest'][]; // [interest!]!
     post: NexusGenRootTypes['post'] | null; // post
-    postGroup: NexusGenRootTypes['post_group'] | null; // post_group
-    postGroups: NexusGenRootTypes['post_group'][]; // [post_group!]!
-    postTagRef: NexusGenRootTypes['post_tag_ref'] | null; // post_tag_ref
-    postTagRefs: NexusGenRootTypes['post_tag_ref'][]; // [post_tag_ref!]!
-    postTemp: NexusGenRootTypes['post_temp'] | null; // post_temp
-    postTemps: NexusGenRootTypes['post_temp'][]; // [post_temp!]!
     posts: NexusGenRootTypes['post'][]; // [post!]!
-    read: NexusGenRootTypes['read'] | null; // read
-    reads: NexusGenRootTypes['read'][]; // [read!]!
-    tag: NexusGenRootTypes['tag'] | null; // tag
-    tags: NexusGenRootTypes['tag'][]; // [tag!]!
+    posts_trend: Array<NexusGenRootTypes['post'] | null> | null; // [post]
     user: NexusGenRootTypes['user'] | null; // user
     users: NexusGenRootTypes['user'][]; // [user!]!
   }
   comment: { // field return type
     comment: NexusGenRootTypes['comment']; // comment!
-    created_at: NexusGenScalars['DateTime']; // DateTime!
+    created_at: NexusGenScalars['DateTime'] | null; // DateTime
     id: string; // String!
     other_comment: NexusGenRootTypes['comment'][]; // [comment!]!
     post: NexusGenRootTypes['post']; // post!
@@ -664,21 +735,25 @@ export interface NexusGenFieldTypes {
     user: NexusGenRootTypes['user']; // user!
   }
   interest: { // field return type
-    created_at: NexusGenScalars['DateTime'] | null; // DateTime
+    created_at: NexusGenScalars['DateTime']; // DateTime!
     post: NexusGenRootTypes['post']; // post!
     user: NexusGenRootTypes['user']; // user!
   }
   post: { // field return type
     comment: NexusGenRootTypes['comment'][]; // [comment!]!
+    comment_count: number; // Int!
     content: string; // String!
     created_at: NexusGenScalars['DateTime']; // DateTime!
     hidden: boolean; // Boolean!
     id: string; // String!
     interest: NexusGenRootTypes['interest'][]; // [interest!]!
+    like_count: number; // Int!
     post_tag_ref: NexusGenRootTypes['post_tag_ref'][]; // [post_tag_ref!]!
     post_temp: NexusGenRootTypes['post_temp'] | null; // post_temp
     pre_content: string; // String!
     read: NexusGenRootTypes['read'][]; // [read!]!
+    read_count: number; // Int!
+    score: number; // Int!
     thumbnail: string | null; // String
     title: string; // String!
     url: string; // String!
@@ -703,12 +778,12 @@ export interface NexusGenFieldTypes {
     title: string | null; // String
   }
   read: { // field return type
-    created_at: NexusGenScalars['DateTime'] | null; // DateTime
+    created_at: NexusGenScalars['DateTime']; // DateTime!
     post: NexusGenRootTypes['post']; // post!
     user: NexusGenRootTypes['user']; // user!
   }
   tag: { // field return type
-    created_at: NexusGenScalars['DateTime'] | null; // DateTime
+    created_at: NexusGenScalars['DateTime']; // DateTime!
     name: string; // String!
     post_tag_ref: NexusGenRootTypes['post_tag_ref'][]; // [post_tag_ref!]!
   }
@@ -718,31 +793,24 @@ export interface NexusGenFieldTypes {
     image: string | null; // String
     introduction: string | null; // String
     social: NexusGenScalars['Json'] | null; // Json
+    token: string | null; // String
     velog_name: string; // String!
   }
 }
 
 export interface NexusGenFieldTypeNames {
   Mutation: { // field return type name
+    createManypost_tag_ref: 'post_tag_ref'
     createOnepost: 'post'
+    createOnetag: 'tag'
+    createOneuser: 'user'
+    oAuthGoogle: 'Json'
+    validate_id: 'Json'
   }
   Query: { // field return type name
-    comment: 'comment'
-    comments: 'comment'
-    interest: 'interest'
-    interests: 'interest'
     post: 'post'
-    postGroup: 'post_group'
-    postGroups: 'post_group'
-    postTagRef: 'post_tag_ref'
-    postTagRefs: 'post_tag_ref'
-    postTemp: 'post_temp'
-    postTemps: 'post_temp'
     posts: 'post'
-    read: 'read'
-    reads: 'read'
-    tag: 'tag'
-    tags: 'tag'
+    posts_trend: 'post'
     user: 'user'
     users: 'user'
   }
@@ -763,15 +831,19 @@ export interface NexusGenFieldTypeNames {
   }
   post: { // field return type name
     comment: 'comment'
+    comment_count: 'Int'
     content: 'String'
     created_at: 'DateTime'
     hidden: 'Boolean'
     id: 'String'
     interest: 'interest'
+    like_count: 'Int'
     post_tag_ref: 'post_tag_ref'
     post_temp: 'post_temp'
     pre_content: 'String'
     read: 'read'
+    read_count: 'Int'
+    score: 'Int'
     thumbnail: 'String'
     title: 'String'
     url: 'String'
@@ -811,78 +883,47 @@ export interface NexusGenFieldTypeNames {
     image: 'String'
     introduction: 'String'
     social: 'Json'
+    token: 'String'
     velog_name: 'String'
   }
 }
 
 export interface NexusGenArgTypes {
   Mutation: {
+    createManypost_tag_ref: { // args
+      post_id: string; // String!
+      tags: Array<string | null>; // [String]!
+    }
     createOnepost: { // args
       data: NexusGenInputs['postCreateInput']; // postCreateInput!
     }
+    createOnetag: { // args
+      data: NexusGenInputs['tagCreateInput']; // tagCreateInput!
+    }
+    createOneuser: { // args
+      data: NexusGenInputs['userCreateInput']; // userCreateInput!
+    }
+    oAuthGoogle: { // args
+      token: string; // String!
+    }
+    validate_id: { // args
+      id: string; // String!
+    }
   }
   Query: {
-    comment: { // args
-      where: NexusGenInputs['commentWhereUniqueInput']; // commentWhereUniqueInput!
-    }
-    comments: { // args
-      cursor?: NexusGenInputs['commentWhereUniqueInput'] | null; // commentWhereUniqueInput
-      skip?: number | null; // Int
-      take?: number | null; // Int
-    }
-    interest: { // args
-      where: NexusGenInputs['interestWhereUniqueInput']; // interestWhereUniqueInput!
-    }
-    interests: { // args
-      cursor?: NexusGenInputs['interestWhereUniqueInput'] | null; // interestWhereUniqueInput
-      skip?: number | null; // Int
-      take?: number | null; // Int
-    }
     post: { // args
       where: NexusGenInputs['postWhereUniqueInput']; // postWhereUniqueInput!
     }
-    postGroup: { // args
-      where: NexusGenInputs['post_groupWhereUniqueInput']; // post_groupWhereUniqueInput!
-    }
-    postGroups: { // args
-      cursor?: NexusGenInputs['post_groupWhereUniqueInput'] | null; // post_groupWhereUniqueInput
-      skip?: number | null; // Int
-      take?: number | null; // Int
-    }
-    postTagRef: { // args
-      where: NexusGenInputs['post_tag_refWhereUniqueInput']; // post_tag_refWhereUniqueInput!
-    }
-    postTagRefs: { // args
-      cursor?: NexusGenInputs['post_tag_refWhereUniqueInput'] | null; // post_tag_refWhereUniqueInput
-      skip?: number | null; // Int
-      take?: number | null; // Int
-    }
-    postTemp: { // args
-      where: NexusGenInputs['post_tempWhereUniqueInput']; // post_tempWhereUniqueInput!
-    }
-    postTemps: { // args
-      cursor?: NexusGenInputs['post_tempWhereUniqueInput'] | null; // post_tempWhereUniqueInput
-      skip?: number | null; // Int
-      take?: number | null; // Int
-    }
     posts: { // args
       cursor?: NexusGenInputs['postWhereUniqueInput'] | null; // postWhereUniqueInput
+      orderBy?: NexusGenInputs['QueryPostsOrderByInput'][] | null; // [QueryPostsOrderByInput!]
       skip?: number | null; // Int
       take?: number | null; // Int
+      where?: NexusGenInputs['QueryPostsWhereInput'] | null; // QueryPostsWhereInput
     }
-    read: { // args
-      where: NexusGenInputs['readWhereUniqueInput']; // readWhereUniqueInput!
-    }
-    reads: { // args
-      cursor?: NexusGenInputs['readWhereUniqueInput'] | null; // readWhereUniqueInput
-      skip?: number | null; // Int
-      take?: number | null; // Int
-    }
-    tag: { // args
-      where: NexusGenInputs['tagWhereUniqueInput']; // tagWhereUniqueInput!
-    }
-    tags: { // args
-      cursor?: NexusGenInputs['tagWhereUniqueInput'] | null; // tagWhereUniqueInput
+    posts_trend: { // args
+      cursor?: string | null; // String
+      interval: string | null; // String
       skip?: number | null; // Int
       take?: number | null; // Int
     }
@@ -943,7 +984,7 @@ export type NexusGenObjectNames = keyof NexusGenObjects;
 
 export type NexusGenInputNames = keyof NexusGenInputs;
 
-export type NexusGenEnumNames = never;
+export type NexusGenEnumNames = keyof NexusGenEnums;
 
 export type NexusGenInterfaceNames = never;
 
