@@ -85,7 +85,7 @@ export const User = extendType({
 
     t.field("deleteOneuser", {
       type: "user",
-      description: "회원을 탈퇴 시킵니다.",
+      description: "회원을 탈퇴 시킵니다.(access token)",
       async resolve(_, args, ctx: Context) {
         const payload = await ctx.jwt.validate()
         

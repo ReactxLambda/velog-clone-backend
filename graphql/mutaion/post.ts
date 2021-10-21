@@ -6,7 +6,7 @@ export const Post = extendType({
   type: "Mutation",
   definition: (t) => {
     t.crud.createOnepost({
-      description: "유저의 게시글을 만듭니다.",
+      description: "유저의 게시글을 만듭니다.(access token)",
       computedInputs: {
         id: () => "",
         user: () => ""
