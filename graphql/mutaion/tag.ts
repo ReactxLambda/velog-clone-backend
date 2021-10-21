@@ -32,13 +32,23 @@ export const Tag = extendType({
     })
 
     t.field("createManypost_tag_ref", {
-      description: "개시글에 태그를 추가합니다.\n 없는 태그를 입력시 생성후 게시글에 추가 합니다.",
+      description: "개시글에 태그를 추가합니다.\n 없는 태그를 입력시 생성후 게시글에 추가 합니다.(access token)",
       args: {
         post_id: nonNull(stringArg()),
         tags : nonNull(list(stringArg()))
       },
       type: list(post_tag_ref),
       async resolve(_, args, ctx: Context) {
+        const payload = await ctx.jwt.validate()
+        const post_count = await ctx.db.post.count({
+          where:{
+            user_id : payload.id,
+            id: args.post_id
+          }
+        })
+        if(post_count > 0){
+          throw new Error("자신의 게시글이 아닙니다.")
+        }
 
         const post_tag_ref_args = args.tags.map((data) => {  // post_tag_ref의 arg
           return {
@@ -75,17 +85,25 @@ export const Tag = extendType({
       },
     })
 
-    t.crud.deleteOnepost_tag_ref()
-
     t.field("deleteManypost_tag_ref", {
-      description: "개시글에 태그를 삭제합니다.\n 없는 태그를 입력시 생성후 게시글에 추가 합니다.",
+      description: "개시글에 태그를 삭제합니다.\n 없는 태그를 입력시 생성후 게시글에 추가 합니다.(access token)",
       args: {
         post_id: nonNull(stringArg()),
         tags : nonNull(list(stringArg()))
       },
       type: "String",
       async resolve(_, args, ctx: Context) {
-
+        const payload = await ctx.jwt.validate()
+        const post_count = await ctx.db.post.count({
+          where:{
+            user_id : payload.id,
+            id: args.post_id
+          }
+        })
+        if(post_count > 0){
+          throw new Error("자신의 게시글이 아닙니다.")
+        }
+        
         const post_tag_ref_args = args.tags.map((data) => {  // post_tag_ref의 arg
           return {
             tag_name : data,
