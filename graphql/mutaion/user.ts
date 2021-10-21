@@ -82,5 +82,21 @@ export const User = extendType({
         }
       },
     })
+
+    t.field("deleteOneuser", {
+      type: "user",
+      description: "회원을 탈퇴 시킵니다.",
+      async resolve(_, args, ctx: Context) {
+        const payload = await ctx.jwt.validate()
+        
+        const user = await ctx.db.user.delete({
+          where:{
+            id:payload.id
+          }
+        })
+        return user
+      }
+    })
+
   },
 })
