@@ -32,5 +32,19 @@ export const Post = extendType({
         return post
       },
     })
+
+    t.field("uploadPostImage", {
+      type: "String",
+      description : "image file의 정보를 받아 파일을 업로드 할수 있는 url을 반환 합니다.",
+      args :{
+        mime: "String",
+        file_name: "String",
+      },
+      async resolve(_, args, ctx: Context, ____){
+        const payload = await ctx.jwt.validate()
+        return await ctx.s3.createPreSignUrl(`${payload.id}/${uuidv4()}/${args.file_name}`, args.mime)
+      }
+    })
+    
   },
 })

@@ -11,6 +11,7 @@ import { Query } from "./graphql/query/index"
 import { Mutaion } from "./graphql/mutaion/index"
 import { GraphQLBigInt } from "./graphql/type"
 import { AuthJWT } from "./graphql/common/oauth/jwt"
+import { S3Image } from "./graphql/common/aws/s3"
 
 const schema = makeSchema({
   types: [Query, Mutaion, Schemas, asNexusMethod(GraphQLBigInt, "BigInt")],
@@ -45,7 +46,8 @@ const server = new ApolloServer({
   context: async ({ event }): Promise<Context> => {
     return ({
       db: db,
-      jwt: AuthJWT.getInstance(db, event.headers.Authorization)
+      jwt: AuthJWT.getInstance(db, event.headers.Authorization),
+      s3: S3Image.getInstance()
     })
   }
   ,
@@ -56,7 +58,7 @@ const server = new ApolloServer({
           endpoint: `/${process.env.NODE_ENV === "development" ? "development" : process.env.NODE_ENV}/graphql`,
         },
 })
-console.log(process.env.NODE_ENV)
+
 exports.graphqlHandler = server.createHandler({
   cors: {
     origin: "*",

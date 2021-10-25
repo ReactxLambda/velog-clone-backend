@@ -63,7 +63,7 @@ export const Tag = extendType({
           data: tag_args,
           skipDuplicates: true,
         })
-        console.log(tag_args)
+
         await ctx.db.post_tag_ref.createMany({  // 게시글에 테그 추가
           data :post_tag_ref_args,
           skipDuplicates: true,

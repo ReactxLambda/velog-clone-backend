@@ -1,6 +1,5 @@
 import * as jsonwebtoken from "jsonwebtoken"
 import { PrismaClient } from "@prisma/client"
-import {user} from "../../schema/user"
 
 type JWTUser = {
   id : string

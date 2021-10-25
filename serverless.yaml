@@ -30,13 +30,8 @@ provider:
         - "ec2:DeleteNetworkInterface"
         - "ec2:AssignPrivateIpAddresses"
         - "ec2:UnassignPrivateIpAddresses"
+        - "s3:*"
       Resource: "*"
-  # vpc:
-  #   securityGroupIds:
-  #     - ${env:SECURITY_GROUP_ID}
-  #   subnetIds:
-  #     - ${env:SUBNET_ID_PRIMARY}
-  #     - ${env:SUBNET_ID_SECONDARY}
 
 functions:
   graphql:
