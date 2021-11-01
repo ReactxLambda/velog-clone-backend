@@ -13,6 +13,18 @@ export const Post = extendType({
       },
       async resolve(_, args, ctx: Context, __, ___) {
         const payload = await ctx.jwt.validate()
+        if(!args.data.url){
+          args.data.url = args.data.title.trim().replace(" ", "-")
+        }
+        const postUrl = await ctx.db.post.findFirst({
+          where:{
+            user_id : payload.id,
+            url : args.data.url
+          }
+        })
+        if(!postUrl){
+          args.data.url = args.data.url + (new Date()).getUTCDate()
+        }
         const post = await ctx.db.post.create({
           data : {
             id : uuidv4(),
