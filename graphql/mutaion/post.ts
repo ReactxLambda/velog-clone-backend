@@ -34,7 +34,7 @@ export const Post = extendType({
     })
 
     t.field("uploadPostImage", {
-      type: "String",
+      type: "Json",
       description : "image file의 정보를 받아 파일을 업로드 할수 있는 url을 반환 합니다.",
       args :{
         mime: "String",
@@ -42,7 +42,12 @@ export const Post = extendType({
       },
       async resolve(_, args, ctx: Context, ____){
         const payload = await ctx.jwt.validate()
-        return await ctx.s3.createPreSignUrl(`${payload.id}/${uuidv4()}/${args.file_name}`, args.mime)
+        const imageId = uuidv4()
+        const preSignedUrl = await ctx.s3.createPreSignUrl(`${payload.id}/${imageId}/${args.file_name}`, args.mime)
+        return {
+          key : `https://velog-clone-images.s3.ap-northeast-2.amazonaws.com/${payload.id}/${imageId}/${args.file_name}`,
+          url : preSignedUrl
+        }
       }
     })
     
