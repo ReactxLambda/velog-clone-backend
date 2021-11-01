@@ -9,12 +9,15 @@ export const Post = extendType({
       description: "유저의 게시글을 만듭니다.(access token)",
       computedInputs: {
         id: () => "",
-        user: () => ""
+        user: () => "",
+        comment_count : () => 0,
+        like_count : () => 0,
+        score: () => 0,
       },
       async resolve(_, args, ctx: Context, __, ___) {
         const payload = await ctx.jwt.validate()
         if(!args.data.url){
-          args.data.url = args.data.title.trim().replace(" ", "-")
+          args.data.url = args.data.title.trim().replace(/ /gi, "-")
         }
         const postUrl = await ctx.db.post.findFirst({
           where:{
@@ -23,7 +26,7 @@ export const Post = extendType({
           }
         })
         if(!postUrl){
-          args.data.url = args.data.url + (new Date()).getUTCDate()
+          args.data.url = args.data.url + +(new Date())
         }
         const post = await ctx.db.post.create({
           data : {
