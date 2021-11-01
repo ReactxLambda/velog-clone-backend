@@ -44,6 +44,7 @@ const db = new PrismaClient()
 const server = new ApolloServer({
   schema: schema,
   context: async ({ event }): Promise<Context> => {
+    console.log(event.headers)
     return ({
       db: db,
       jwt: AuthJWT.getInstance(db, event.headers.Authorization),

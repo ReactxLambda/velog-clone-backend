@@ -49,6 +49,7 @@ export class AuthJWT {
       if (this.bearer && this.bearer.length > bearerLength) {
         const token = this.bearer.slice(bearerLength)
         const payload = <JWTPayload>AuthJWT.jwt.verify(token, this.getSecretKey)
+        console.log(payload)
         return await this.db.user.findUnique({
           where : {
             id : payload.id
