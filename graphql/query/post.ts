@@ -6,14 +6,49 @@ import { getInterval } from "../common/date/interval"
 export const Post = extendType({
   type: "Query",
   definition: (t) => {
-    t.crud.post({
-      description: "개시글을 가져옵니다.",
-      async resolve(root, args, ctx: Context, info, originalResolve) {
-        return ctx.db.post.findFirst({
-          where: {
-            hidden: false,
+    t.field('onePost',{
+      type : post,
+      description:"user id와 post url로 하나의 게시글을 가져옵니다.",
+      args:{
+        user_id: arg({
+          type: 'String',
+          description: '유저의 id"',
+        }),
+        post_url: arg({
+          type: 'String',
+          description: '게시글의 url"',
+        }),
+      },
+      async resolve(_, args, ctx: Context) {
+        const post = await ctx.db.post.findFirst({
+          select : {
+            comment : true,
+            user : true,
+            read : true,
+            comment_count : true,
+            content : true,
+            created_at : true,
+            hidden : true,
+            id : true,
+            interest : true,
+            like_count : true,
+            post_tag_ref : true,
+            post_temp : true,
+            pre_content : true,
+            read_count : true,
+            score : true,
+            thumbnail : true,
+            title : true,
+            url : true,
+            user_id : true
           },
+          where :{
+            user_id : args.user_id,
+            url : args.post_url
+          }
         })
+        console.log(post)
+        return post
       },
     })
     t.crud.posts({
