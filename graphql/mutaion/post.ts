@@ -25,7 +25,7 @@ export const Post = extendType({
             url : args.data.url
           }
         })
-        if(!postUrl){
+        if(postUrl){
           args.data.url = args.data.url + +(new Date())
         }
         const post = await ctx.db.post.create({
